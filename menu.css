@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 460;
+    font-style: normal;
 }
 
 nav.menu a {
@@ -12,8 +18,7 @@ nav.menu a {
 
 .menu {
     overflow: hidden;
-    background-color: red;
-    font-family: Arial;
+    background-color: #29d1b1;
     position: relative;
 }
 
@@ -33,11 +38,11 @@ nav.menu a {
 }
 
 .menu-left:hover, .menu-right:hover {
-    background-color: green;
+    background-color: #7de5d1;
 }
 
 .menu-search:hover {
-    background-color: red;
+    background-color: #29d1b1;
 }
 
 .submenu {
@@ -51,6 +56,7 @@ nav.menu a {
     margin-top: -50%;
     font-size: 17px;
     border: none;
+    border-radius: 3px;
 }
 
 /* Style the button inside the input container */
@@ -62,6 +68,7 @@ nav.menu a {
     font-size: 15px;
     border: none;
     cursor: pointer;
+    border-radius: 3px;
 }
 
 .menu .menu-search button:hover {
