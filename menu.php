@@ -4,7 +4,6 @@ include "global_functions.php";
 global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER;
 ?>
 
-<header>
     <link rel="stylesheet" type="text/css" href="menu.css">
     <script language="javascipt" src="javascript/animated_text.js"></script>
     <nav class="menu">
@@ -16,17 +15,13 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER;
         </a>
         <a href="<?php siteURL("reserve_item") ?>">
             <div class="menu-left">
-                Varaa
-                <!--
-                <div class="submenu" id="submenu-reserve">
-                    <a href="<?php siteURL("reserve/book")?>"><div>Kirja / Äänikirja</div></a>
+                <span id="submenu-dropdown">Varaa</span>
+                <div class="submenu">
+                    <a href="<?php siteURL("reserve/book")?>"><div>Kirja</div></a>
                     <a href="<?php siteURL("reserve/room")?>"><div>Huone</div></a>
                     <a href="<?php siteURL("reserve/item")?>"><div>Työkalu / Väline</div></a>
                     <a href="<?php siteURL("reserve/movie")?>"><div>Elokuva</div></a>
                 </div>
-                    <span id="menu_reserve_item"></span>
-                    <script>animateText("menu_reserve_item", 2000, "Kirja", "Työkalu", "Huone", "Kappale", "Luento")</script>
-                -->
             </div>
         </a>
 
@@ -123,4 +118,3 @@ Hoitaja
         }
         ?>
     </nav>
-</header>

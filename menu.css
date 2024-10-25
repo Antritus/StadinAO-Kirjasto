@@ -10,16 +10,23 @@
     font-style: normal;
 }
 
-nav.menu a {
-    overflow: hidden;
-    text-decoration: none;
-    color: black;
+/* Menu Styles */
+nav.menu {
+    background-color: #29d1b1; /* Ensure background color is set here */
+    position: relative;
+    z-index: 0;
 }
 
-.menu {
-    overflow: hidden;
-    background-color: #29d1b1;
-    position: relative;
+/* Clearfix for menu to contain floated children */
+.menu::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+nav.menu a {
+    text-decoration: none;
+    color: black;
 }
 
 .menu .menu-left,
@@ -31,29 +38,58 @@ nav.menu a {
     padding: 16px 18px;
     box-sizing: border-box;
     height: 50px;
+    cursor: pointer;
+    position: relative; /* Important for submenu positioning */
 }
 
 .menu .menu-right {
     float: right;
 }
 
-.menu-left:hover, .menu-right:hover {
-    background-color: #7de5d1;
+.menu-left:hover,
+.menu-right:hover {
+    background-color: #7de5d1; /* Change background on hover */
 }
 
-.menu-search:hover {
-    background-color: #29d1b1;
-}
-
+/* Submenu Styles */
 .submenu {
-    visibility: hidden;
+    display: none;
+    position: absolute; /* Ensure the submenu appears above content */
+    background: #7de5d1;
+    min-width: 160px;
+    z-index: 10; /* Make sure the submenu is above other content */
+    top: 100%; /* Position it directly below the parent menu */
+    left: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a shadow for visibility */
+}
+
+.submenu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Show submenu on hover */
+.menu-left:hover .submenu,
+.menu-right:hover .submenu {
+    display: block;
+}
+
+/* Additional styling for submenu items */
+.submenu a:hover {
+    background-color: #5bc2aa;
+}
+
+/* Search bar styling */
+.menu-search:hover {
+    background-color: #29d1b1; /* Keep color when hovered */
 }
 
 /* Style the input field inside the navbar */
 .menu input[type=text] {
     padding: 6px 6px 6px;
-/*    margin-top: 8px;*/
-    margin-top: -50%;
     font-size: 17px;
     border: none;
     border-radius: 3px;
@@ -62,7 +98,6 @@ nav.menu a {
 /* Style the button inside the input container */
 .menu .menu-search button {
     padding: 6px;
-    margin-top: -2.5%;
     margin-right: 16px;
     background: #ddd;
     font-size: 15px;
@@ -75,12 +110,14 @@ nav.menu a {
     background: #ccc;
 }
 
-/* Add responsiveness - On small screens, display the navbar vertically instead of horizontally */
+/* Responsive Styles */
 @media screen and (max-width: 600px) {
     .menu .menu-search {
         float: none;
     }
-    .menu a, .menu input[type=text], .menu .menu-search button {
+    .menu a,
+    .menu input[type=text],
+    .menu .menu-search button {
         float: none;
         display: block;
         text-align: left;
