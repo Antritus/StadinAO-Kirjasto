@@ -1,12 +1,11 @@
 <?php
 include "global_functions.php";
+include "user_account.php";
 
-global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER;
+global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LOGGED_IN;
 ?>
-
-    <link rel="stylesheet" type="text/css" href="menu.css">
-    <script language="javascipt" src="javascript/animated_text.js"></script>
-    <nav class="menu">
+<header>
+ <nav class="menu">
         <a href="<?php siteURL("index") ?>">
             <div class="menu-left menu-logo">Kirjasto</div>
         </a>
@@ -32,26 +31,11 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER;
             <div class="menu-left">Toivelaatikko</div>
         </a>
 
-        <div class="menu-right menu-search">
-            <form>
-                <label>
-                    <label>
-                        <input type="text" name="searching_for" placeholder="<?php
-                        $CATEGORY = [
-                            "Kirjan nimi", "Kirjailija", "Vuosi luku", "Tyylilaji",
-                            "ISBN (Tuote koodi)", "Työkalu", "Väline", "Harrastus",
-                            "Eläin", "Lehti", "Artisti", "Soitin", "Henkilö"];
-                        $CHOSEN = $CATEGORY[rand(0, sizeof($CATEGORY)-1)];
-                        echo $CHOSEN;
-                        ?>...">
-                    </label>
-                    <button type="submit"><i class="fa fa-search" style="font-size:14px"></i> Etsi</button>
-                </label>
-            </form>
-        </div>
-        <a href="<?php siteURL("käyttäjä") ?>">
-            <div class="menu-right menu-account"><i class="fa fa-user" style="font-size:25px"></i></div>
-        </a>
+     <div class="menu-right menu-account" <?php
+        if (!$LOGGED_IN) {
+            echo "onclick=\"document.getElementById('id01').style.display='block'\"";
+        }
+     ?>><i class="fa fa-user" style="font-size:25px"></i></div>
 
         <?php
         if ($ADMINISTRATOR){
@@ -117,4 +101,23 @@ Hoitaja
                     ";
         }
         ?>
+
+     <div class="menu-right menu-search">
+         <form>
+                     <input type="text" name="searching_for" placeholder="<?php
+                     $CATEGORY = [
+                         "Kirjan nimi", "Kirjailija", "Vuosi luku", "Tyylilaji",
+                         "ISBN (Tuote koodi)", "Työkalu", "Väline", "Harrastus",
+                         "Eläin", "Lehti", "Artisti", "Soitin", "Henkilö"];
+                     $CHOSEN = $CATEGORY[rand(0, sizeof($CATEGORY)-1)];
+                     echo $CHOSEN;
+                     ?>...">
+                 <button type="submit"><i class="fa fa-search" style="font-size:14px"></i> Etsi</button>
+         </form>
+     </div>
     </nav>
+</header>
+
+<?php
+include "user_login.php";
+?>
