@@ -33,7 +33,7 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
 
      <div class="menu-right menu-account" <?php
         if (!$LOGGED_IN) {
-            echo "onclick=\"document.getElementById('id01').style.display='block'\"";
+            echo "onclick=\"document.getElementById('login-screen').style.display='block'\"";
         }
      ?>><i class="fa fa-user" style="font-size:25px"></i></div>
 
@@ -118,6 +118,44 @@ Hoitaja
     </nav>
 </header>
 
-<?php
-include "user_login.php";
-?>
+<div id="login-screen" class="modal login-screen">
+  <span onclick="document.getElementById('login-screen').style.display='none'"
+        class="close" title="Close Modal">&times;</span>
+
+    <!-- Modal Content -->
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="imgcontainer">
+            <img src="https://cdn.prod.website-files.com/62bdc93e9cccfb43e155104c/63c3b5871a14151846293c4d_Funny%20Cat%20Pfp%20for%20Tiktok%201.jpg" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="container">
+            <label for="username"><b>Käyttäjä</b></label>
+            <input type="text" placeholder="Käyttäjänimi" name="username" required>
+
+            <label for="password"><b>Salasana</b></label>
+            <input type="password" placeholder="Salasana" name="password" required>
+
+            <button type="submit">Kirjaudu</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Muista Minut
+            </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('login-screen').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Unohditko <a href="#">salasanasi?</a></span>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('login-screen');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

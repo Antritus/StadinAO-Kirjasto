@@ -21,6 +21,12 @@ include "account.php"
       ?>
   </header>
 
+  <img src="FELV-cat.jpg" alt="EMT">
+  <style> img {
+          width: 100%;
+          height: 100%;
+      }
+  </style>
 
   </body>
 </html>
