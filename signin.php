@@ -14,9 +14,9 @@
             <label for="password"><b>Salasana</b></label>
             <input type="password" placeholder="Salasana" name="password" required>
 
-            <button type="submit">Kirjaudu</button>
+            <button type="submit" name="submit">Kirjaudu</button>
             <label>
-                <input type="checkbox" checked="checked" name="remember"> Muista Minut
+                <input type="checkbox" checked="checked" name="stayLogged"> Muista Minut
             </label>
         </div>
 
@@ -27,3 +27,8 @@
         </div>
     </form>
 </div>
+<?php
+if (isset($_GET["signin"])) {
+    echo "<script>signin()</script>";
+}
+?>

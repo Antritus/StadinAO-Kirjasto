@@ -11,7 +11,7 @@
             <label for="email"><b>Sähköposti</b></label>
             <input type="email" placeholder="Sähköposti" name="email" required>
 
-            <button type="submit">Vaihda Salasana</button>
+            <button type="submit" name="submit">Vaihda Salasana</button>
         </div>
 
         <div class="container" style="background-color:#f1f1f1">
@@ -20,3 +20,8 @@
         </div>
     </form>
 </div>
+<?php
+if (isset($_GET["password_reset"])) {
+    echo "<script>signinResetPassword()</script>";
+}
+?>

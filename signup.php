@@ -2,7 +2,32 @@
     <form class="modal-content animate" method="post" action="build/signup.bld.php">
         <div class="imgcontainer">
             <img src="assets/logo.png" alt="Logo" class="avatar">
-            <h3>Luo Käyttäjä</h3>
+            <h1>Luo Käyttäjä</h1>
+
+
+            <?php
+
+            if (isset($_GET["error"]))
+                switch ($_GET["error"]){
+                    case "field_empty":
+                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p>Täytä pakolliset kohdat</p></div>";
+                        break;
+                    case "invalid_email";
+                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p'>Sähköposti osoite ei ole käytettävissä</p></div>";
+                        break;
+                    case "passwords_dont_match";
+                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p>Salasanat eivät ole samat</p></div>";
+                        break;
+                    case "email_already_exists";
+                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p>Sähköposti osoite on jo käytössä</p></div>";
+                        break;
+                    case "none";
+                        header("location: index.php");
+                        exit();
+                    default:
+                        break;
+                }
+            ?>
         </div>
 
         <div class="container" style="margin-left:">
@@ -28,9 +53,9 @@
                 <div style="float: left; width: 29.5%;">
                     <label for="postarea"><b>Postitoimialue</b></label>
                     <select id="country" name="postarea">
-                        <option value="Afghanistan">Espoo</option>
-                        <option value="Afghanistan" selected>Helsinki</option>
-                        <option value="Afghanistan">Vantaa</option>
+                        <option value="Espoo">Espoo</option>
+                        <option value="Helsinki" selected>Helsinki</option>
+                        <option value="Vantaa">Vantaa</option>
                     </select>
                 </div>
             </div>
@@ -46,7 +71,7 @@
             </div>
             <div style="display: inline">
                 <div style="float: left; width: 49.5%; margin-left: 1px">
-                    <label for="pswdRepeat"><b>Salasana</b></label>
+                    <label for="pswd"><b>Salasana</b></label>
                     <input type="password" placeholder="Salasana" name="pswd" required>
                 </div>
                 <div style="float: right; width: 49.5%;">
@@ -54,10 +79,10 @@
                     <input type="password" placeholder="Salasana" name="pswdR" required>
                 </div>
             </div>
-            <button type="submit">Luo Käyttäjä</button>
             <label>
-                <input type="checkbox" checked="checked" name="remember"> Muista Minut
+                <input type="checkbox" name="remember" checked> Muista Minut
             </label>
+            <button type="submit" name="submit">Luo Käyttäjä</button>
         </div>
 
         <div class="container" style="background-color:#f1f1f1">
@@ -66,3 +91,8 @@
         </div>
     </form>
 </div>
+<?php
+if (isset($_GET["signup"])) {
+    echo "<script>signup()</script>";
+}
+?>

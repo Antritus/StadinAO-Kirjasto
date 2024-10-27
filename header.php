@@ -1,5 +1,5 @@
 <?php
-include "build/functions.bld.php"
+include_once "build/functions.bld.php"
 ?>
 
 
