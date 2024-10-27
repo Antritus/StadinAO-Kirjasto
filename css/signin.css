@@ -11,6 +11,7 @@
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
+    border-radius: 4px;
 }
 
 /* Modal Content/Box */
@@ -19,8 +20,7 @@
     margin: 5px auto; /* 15% from the top and centered */
     border: 1px solid #888;
     width: 40%; /* Could be more or less, depending on screen size */
-    border-radius: 4px;
-
+    border-radius: 10px;
 }
 
 /* The Close Button */
@@ -81,7 +81,7 @@
 /* Set a style for all buttons */
 .login-screen button {
     background-color: #29d1b1;
-    color: white;
+    color: black;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;

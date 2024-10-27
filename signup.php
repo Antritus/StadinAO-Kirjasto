@@ -10,16 +10,16 @@
             if (isset($_GET["error"]))
                 switch ($_GET["error"]){
                     case "field_empty":
-                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p>Täytä pakolliset kohdat</p></div>";
+                        echo "<div class='login-error'><h2>Käyttäjätiliä ei luotu!</h2><p>Täytä pakolliset kohdat</p></div>";
                         break;
                     case "invalid_email";
-                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p'>Annettu sähköposti on virheellinen</p></div>";
+                        echo "<div class='login-error'><h2>Käyttäjätiliä ei luotu!</h2><p'>Annettu sähköposti on virheellinen</p></div>";
                         break;
                     case "passwords_dont_match";
-                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p>Annetut salasanat eivät täsmää</p></div>";
+                        echo "<div class='login-error'><h2>Käyttäjätiliä ei luotu!</h2><p>Annetut salasanat eivät täsmää</p></div>";
                         break;
                     case "email_already_exists";
-                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p>Annettu sähköposti on jo käytössä</p></div>";
+                        echo "<div class='login-error'><h2>Käyttäjätiliä ei luotu!</h2><p>Annettu sähköposti on jo käytössä</p></div>";
                         break;
                     case "none";
                         header("location: index.php");

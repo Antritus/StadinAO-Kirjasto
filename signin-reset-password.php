@@ -3,7 +3,7 @@
     <form class="modal-content animate" method="post" action="build/signin-reset-password.bld.php">
         <div class="imgcontainer">
             <img src="assets/logo.png" alt="Logo" class="avatar">
-            <h3>Vaihda salasanasi</h3>
+            <h1>Vaihda salasanasi</h1>
             <p>Saat viestin sähköpostiin, jos löydämme tunnuksesi palvelimiltamme. Sähköpostissa on ohje salasanan vaihtoon.</p>
         </div>
 

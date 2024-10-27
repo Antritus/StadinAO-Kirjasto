@@ -4,7 +4,7 @@
     <form class="modal-content animate" method="post" action="build/signin.bld.php">
         <div class="imgcontainer">
             <img src="assets/logo.png" alt="Logo" class="avatar">
-            <h3>Kirjaudu Sisään</h3>
+            <h1>Kirjaudu Sisään</h1>
         </div>
 
         <div class="container">
