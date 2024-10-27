@@ -32,7 +32,7 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
 <header>
     <nav class="menu">
         <a href="<?php siteURL("index") ?>">
-            <div class="menu-left menu-logo"><img src="assets/logo.png"></div>
+            <div class="menu-left menu-logo"></div>
         </a>
         <a href="<?php siteURL("borrow") ?>">
             <div class="menu-left">Lainaa</div>

@@ -10,6 +10,7 @@
     font-style: normal;
 }
 
+
 /* Menu Styles */
 nav.menu {
     background-color: #29d1b1; /* Ensure background color is set here */
@@ -17,12 +18,14 @@ nav.menu {
     z-index: 0;
 }
 
+
 /* Clearfix for menu to contain floated children */
 .menu::after {
     content: "";
     display: table;
     clear: both;
 }
+
 
 nav.menu a {
     text-decoration: none;
@@ -45,6 +48,14 @@ nav.menu a {
 .menu .menu-right {
     float: right;
 }
+
+.menu .menu-logo {
+    background-image: url("../assets/logo-black.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 80px;
+}
+
 
 .menu-left:hover,
 .menu-right:hover {
