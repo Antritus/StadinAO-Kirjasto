@@ -1,7 +1,4 @@
 <div id="signup-screen" class="modal login-screen">
-  <span onclick="document.getElementById('login-screen').style.display='none'"
-        class="close" title="Close Modal">&times;</span>
-
     <form class="modal-content animate" method="post" action="build/signup.bld.php">
         <div class="imgcontainer">
             <img src="assets/logo.png" alt="Logo" class="avatar">

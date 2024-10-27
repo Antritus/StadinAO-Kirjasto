@@ -1,6 +1,4 @@
 <div id="signin-screen" class="modal login-screen">
-  <span onclick="document.getElementById('login-screen').style.display='none'"
-        class="close" title="Close Modal">&times;</span>
 
     <!-- Modal Content -->
     <form class="modal-content animate" method="post" action="build/signin.bld.php">

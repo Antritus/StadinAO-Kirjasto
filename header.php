@@ -23,7 +23,7 @@ include "build/functions.bld.php"
 <?php
 
 $LOGGED_IN = false;
-$ADMINISTRATOR = true; /* TODO */
+$ADMINISTRATOR = false; /* TODO */
 $LIBRARIAN_BACKEND_WORKER = false;
 $LIBRARIAN_SERVICE_WORKER = false;
 
@@ -31,9 +31,6 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
 ?>
 <header>
     <nav class="menu">
-        <a href="<?php siteURL("index") ?>">
-            <div class="menu-left menu-logo"></div>
-        </a>
         <a href="<?php siteURL("borrow") ?>">
             <div class="menu-left">Lainaa</div>
         </a>
@@ -56,11 +53,16 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
             <div class="menu-left">Toivelaatikko</div>
         </a>
 
-        <div class="menu-right menu-account" <?php
-        if (!$LOGGED_IN) {
-            echo "onclick='signin();''";
-        }
-        ?>><i class="fa fa-user" style="font-size:25px"></i></div>
+        <?php
+            if (!$LOGGED_IN){
+                echo "
+                <div class='menu-right' onclick='signin()'>Kirjaudu Sisään</div>
+                <div class='menu-right' onclick='signup()'>Luo Käyttäjätili</div>
+                ";
+            } else {
+                echo "<div class='menu-right menu-account'><i class='fa fa-user' style='font-size:25px'></i></div>";
+            }
+        ?>
 
         <?php
         if ($ADMINISTRATOR){
@@ -125,20 +127,6 @@ Hoitaja
                     ";
         }
         ?>
-
-        <div class="menu-right menu-search">
-            <form>
-                <input type="text" name="searching_for" placeholder="<?php
-                $CATEGORY = [
-                    "Kirjan nimi", "Kirjailija", "Vuosi luku", "Tyylilaji",
-                    "ISBN (Tuote koodi)", "Työkalu", "Väline", "Harrastus",
-                    "Eläin", "Lehti", "Artisti", "Soitin", "Henkilö"];
-                $CHOSEN = $CATEGORY[rand(0, sizeof($CATEGORY)-1)];
-                echo $CHOSEN;
-                ?>...">
-                <button type="submit"><i class="fa fa-search" style="font-size:14px"></i> Etsi</button>
-            </form>
-        </div>
     </nav>
 </header>
 
