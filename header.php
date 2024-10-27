@@ -1,11 +1,36 @@
 <?php
-include "global_functions.php";
-include "user_account.php";
+include "build/functions.bld.php"
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
+    <link rel="stylesheet" type="text/css" href="css/signin.css">
+    <link rel="stylesheet" type="text/css" href="css/width.css">
+    <script src="javascript/animated_text.js"></script>
+    <script src="javascript/signin.js"></script>
+
+    <title>Kirjasto</title>
+</head>
+<body>
+
+
+<?php
+
+$LOGGED_IN = false;
+$ADMINISTRATOR = true; /* TODO */
+$LIBRARIAN_BACKEND_WORKER = false;
+$LIBRARIAN_SERVICE_WORKER = false;
 
 global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LOGGED_IN;
 ?>
 <header>
- <nav class="menu">
+    <nav class="menu">
         <a href="<?php siteURL("index") ?>">
             <div class="menu-left menu-logo">Kirjasto</div>
         </a>
@@ -31,11 +56,11 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
             <div class="menu-left">Toivelaatikko</div>
         </a>
 
-     <div class="menu-right menu-account" <?php
+        <div class="menu-right menu-account" <?php
         if (!$LOGGED_IN) {
-            echo "onclick=\"document.getElementById('login-screen').style.display='block'\"";
+            echo "onclick='signin();''";
         }
-     ?>><i class="fa fa-user" style="font-size:25px"></i></div>
+        ?>><i class="fa fa-user" style="font-size:25px"></i></div>
 
         <?php
         if ($ADMINISTRATOR){
@@ -102,60 +127,25 @@ Hoitaja
         }
         ?>
 
-     <div class="menu-right menu-search">
-         <form>
-                     <input type="text" name="searching_for" placeholder="<?php
-                     $CATEGORY = [
-                         "Kirjan nimi", "Kirjailija", "Vuosi luku", "Tyylilaji",
-                         "ISBN (Tuote koodi)", "Työkalu", "Väline", "Harrastus",
-                         "Eläin", "Lehti", "Artisti", "Soitin", "Henkilö"];
-                     $CHOSEN = $CATEGORY[rand(0, sizeof($CATEGORY)-1)];
-                     echo $CHOSEN;
-                     ?>...">
-                 <button type="submit"><i class="fa fa-search" style="font-size:14px"></i> Etsi</button>
-         </form>
-     </div>
+        <div class="menu-right menu-search">
+            <form>
+                <input type="text" name="searching_for" placeholder="<?php
+                $CATEGORY = [
+                    "Kirjan nimi", "Kirjailija", "Vuosi luku", "Tyylilaji",
+                    "ISBN (Tuote koodi)", "Työkalu", "Väline", "Harrastus",
+                    "Eläin", "Lehti", "Artisti", "Soitin", "Henkilö"];
+                $CHOSEN = $CATEGORY[rand(0, sizeof($CATEGORY)-1)];
+                echo $CHOSEN;
+                ?>...">
+                <button type="submit"><i class="fa fa-search" style="font-size:14px"></i> Etsi</button>
+            </form>
+        </div>
     </nav>
 </header>
 
-<div id="login-screen" class="modal login-screen">
-  <span onclick="document.getElementById('login-screen').style.display='none'"
-        class="close" title="Close Modal">&times;</span>
 
-    <!-- Modal Content -->
-    <form class="modal-content animate" action="/action_page.php">
-        <div class="imgcontainer">
-            <img src="https://cdn.prod.website-files.com/62bdc93e9cccfb43e155104c/63c3b5871a14151846293c4d_Funny%20Cat%20Pfp%20for%20Tiktok%201.jpg" alt="Avatar" class="avatar">
-        </div>
-
-        <div class="container">
-            <label for="username"><b>Käyttäjä</b></label>
-            <input type="text" placeholder="Käyttäjänimi" name="username" required>
-
-            <label for="password"><b>Salasana</b></label>
-            <input type="password" placeholder="Salasana" name="password" required>
-
-            <button type="submit">Kirjaudu</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Muista Minut
-            </label>
-        </div>
-
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="document.getElementById('login-screen').style.display='none'" class="cancelbtn">Cancel</button>
-            <span class="psw">Unohditko <a href="#">salasanasi?</a></span>
-        </div>
-    </form>
-</div>
-
-<script>
-    // Get the modal
-    var modal = document.getElementById('login-screen');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
+<?php
+include_once "signin.php";
+include_once "signin-reset-password.php";
+include_once "signup.php";
+?>

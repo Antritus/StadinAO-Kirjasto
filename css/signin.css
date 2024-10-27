@@ -58,14 +58,13 @@
     to {transform: scale(1)}
 }
 
-
 /* Bordered form */
 .login-screen form {
     border: 3px solid #f1f1f1;
 }
 
 /* Full-width inputs */
-.login-screen input[type=text], input[type=password] {
+.login-screen input[type=text], input[type=password], input[type=date], select, input[type=email] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -73,6 +72,10 @@
     border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 4px;
+}
+
+.login-screen select {
+    background-color: white;
 }
 
 /* Set a style for all buttons */
@@ -121,6 +124,15 @@
 .login-screen span.psw {
     float: right;
     padding-top: 16px;
+}
+
+.login-screen span.psw .selectable {
+    color: blue;
+    text-decoration: underline;
+}
+.login-screen span.psw .selectable:hover {
+    color: darkblue;
+    cursor: pointer;
 }
 
 /* Change styles for span and cancel button on extra small screens */
