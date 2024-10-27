@@ -13,13 +13,13 @@
                         echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p>Täytä pakolliset kohdat</p></div>";
                         break;
                     case "invalid_email";
-                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p'>Sähköposti osoite ei ole käytettävissä</p></div>";
+                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p'>Annettu sähköposti on virheellinen</p></div>";
                         break;
                     case "passwords_dont_match";
-                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p>Salasanat eivät ole samat</p></div>";
+                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p>Annetut salasanat eivät täsmää</p></div>";
                         break;
                     case "email_already_exists";
-                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p>Sähköposti osoite on jo käytössä</p></div>";
+                        echo "<div class='login-error'><h3>Käyttäjätiliä ei luotu!</h3><p>Annettu sähköposti on jo käytössä</p></div>";
                         break;
                     case "none";
                         header("location: index.php");
