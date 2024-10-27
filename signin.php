@@ -5,7 +5,8 @@
     <!-- Modal Content -->
     <form class="modal-content animate" method="post" action="build/signin.bld.php">
         <div class="imgcontainer">
-            <img src="https://cdn.prod.website-files.com/62bdc93e9cccfb43e155104c/63c3b5871a14151846293c4d_Funny%20Cat%20Pfp%20for%20Tiktok%201.jpg" alt="Avatar" class="avatar">
+            <img src="assets/logo.png" alt="Logo" class="avatar">
+            <h3>Kirjaudu Sisään</h3>
         </div>
 
         <div class="container">

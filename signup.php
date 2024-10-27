@@ -4,7 +4,8 @@
 
     <form class="modal-content animate" method="post" action="build/signup.bld.php">
         <div class="imgcontainer">
-            <img src="https://cdn.prod.website-files.com/62bdc93e9cccfb43e155104c/63c3b5871a14151846293c4d_Funny%20Cat%20Pfp%20for%20Tiktok%201.jpg" alt="Avatar" class="avatar">
+            <img src="assets/logo.png" alt="Logo" class="avatar">
+            <h3>Luo Käyttäjä</h3>
         </div>
 
         <div class="container" style="margin-left:">
@@ -37,11 +38,11 @@
                 </div>
             </div>
             <div style="display: inline">
-                <div style="float: left; width: 74.5%; margin-left: 1px">
+                <div style="float: left; width: 64.5%; margin-left: 1px">
                     <label for="email"><b>Sähköposti</b></label>
                     <input type="email" placeholder="Sähköposti..." name="email" required>
                 </div>
-                <div style="float: right; width: 24.5%;">
+                <div style="float: right; width: 34.5%;">
                     <label for="birthdate"><b>Syntymäaika</b></label>
                     <input type="date" min="<?php echo (date("Y")-100) . "-" . (date("m-d"));?>" max="<?php echo date("Y-m-d");?>" name="birthdate" required>
                 </div>

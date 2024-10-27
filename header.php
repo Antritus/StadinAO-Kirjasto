@@ -32,14 +32,14 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
 <header>
     <nav class="menu">
         <a href="<?php siteURL("index") ?>">
-            <div class="menu-left menu-logo">Kirjasto</div>
+            <div class="menu-left menu-logo"><img src="assets/logo.png"></div>
         </a>
         <a href="<?php siteURL("borrow") ?>">
             <div class="menu-left">Lainaa</div>
         </a>
-        <a href="<?php siteURL("reserve_item") ?>">
+        <div href="<?php siteURL("reserve_item") ?>">
             <div class="menu-left">
-                <span id="submenu-dropdown">Varaa</span>
+                <span onclick="console.log('A');" id="submenu-dropdown"><a>Varaa</a></span>
                 <div class="submenu">
                     <a href="<?php siteURL("reserve/book")?>"><div>Kirja</div></a>
                     <a href="<?php siteURL("reserve/room")?>"><div>Huone</div></a>
@@ -47,7 +47,7 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
                     <a href="<?php siteURL("reserve/movie")?>"><div>Elokuva</div></a>
                 </div>
             </div>
-        </a>
+        </div>
 
         <a href="<?php siteURL("return") ?>">
             <div class="menu-left">Palauta</div>
@@ -65,24 +65,23 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
         <?php
         if ($ADMINISTRATOR){
             echo "
-<a>
+
 <div class='menu-right administrator'>    
 Admin
 <div class='submenu' id='submenu-admin'>
-<a href='" . siteURL("admin/manage_employees") ."'><div>Muokkaa Työntekijöitä</div></a>
-<a href='" . siteURL("admin/manage_customers") . "'><div>Muokkaa käyttäjiä</div></a>
-<a href='" . siteURL("keeper/manage_books") . "'><div>Muokkaa Kirjoja</div></a>
-<a href='" . siteURL("keeper/manage_items") . "'><div>Muokkaa Vuokrattavia</div></a>
-<a href='" . siteURL("keeper/manage_rooms") . "'><div>Muokkaa Työhuoneita</div></a>
-<a href='" . siteURL("keeper/see_requests") . "'><div>Katso toivelaatikkoa</div></a>
-<a href='" . siteURL("librarian/reserve_books") . "'><div>Varaa kirja</div></a>
-<a href='" . siteURL("librarian/reserve_tools") . "'><div>Varaa tavara</div></a>
-<a href='" . siteURL("librarian/reserve_rooms") . "'><div>Varaa huone</div></a>
-<a href='" . siteURL("librarian/add_customer_request") . "'><div>Lisää asiakas toive</div></a>
+    <a href='" . siteURL("admin/manage_employees") ."'><div>Muokkaa Työntekijöitä</div></a>
+    <a href='" . siteURL("admin/manage_customers") . "'><div>Muokkaa käyttäjiä</div></a>
+    <a href='" . siteURL("keeper/manage_books") . "'><div>Muokkaa Kirjoja</div></a>
+    <a href='" . siteURL("keeper/manage_items") . "'><div>Muokkaa Vuokrattavia</div></a>
+    <a href='" . siteURL("keeper/manage_rooms") . "'><div>Muokkaa Työhuoneita</div></a>
+    <a href='" . siteURL("keeper/see_requests") . "'><div>Katso toivelaatikkoa</div></a>
+    <a href='" . siteURL("librarian/reserve_books") . "'><div>Varaa kirja</div></a>
+    <a href='" . siteURL("librarian/reserve_tools") . "'><div>Varaa tavara</div></a>
+    <a href='" . siteURL("librarian/reserve_rooms") . "'><div>Varaa huone</div></a>
+    <a href='" . siteURL("librarian/add_customer_request") . "'><div>Lisää asiakas toive</div></a>
+</div>
+</div>
 
-</div>
-</div>
-</a>
                     ";
         } else if ($LIBRARIAN_BACKEND_WORKER){
             echo "
