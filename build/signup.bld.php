@@ -22,12 +22,10 @@ if (isset($_POST["submit"])) {
         exit();
     }
 
-    /*
     if (invalidEmail($email)){
         header("location: ../index.php?signup=true&error=invalid_email");
         exit();
     }
-    */
     if (passwordDontMatch($pswd, $pswdR)){
         header("location: ../index.php?signup=true&error=passwords_dont_match");
         exit();
