@@ -1,0 +1,43 @@
+INSERT INTO users (
+    `name`,
+    `sName`,
+    `address`,
+    `postcode`,
+    `postArea`,
+    `birthday`,
+    `email`,
+    `accountName`,
+    `pswd`,
+    `permission`
+) VALUES (
+             'administrator',
+             'administrator',
+             '-',
+             '0',
+             '-',
+             '0000-00-00',
+             'admin@kirjis.com',
+          'admin',
+             '$2y$10$yJjsQxrL9YhyAoApvXi9nuznsXhzNXQs.PFGRVkAm/i0FBoNERhkm',
+          10
+         );
+INSERT INTO users (`name`, `sName`, `address`, `postcode`, `postArea`, `birthday`, `email`, `accountName`, `pswd`) VALUES
+    ('James', 'Taylor', '4318 Johnsonin Metsä', '01900', 'Vantaa', '1987-09-30', 'james.taylor@example.com', NULL, '$2y$10$gB6FcCiwI1Kdy3m.eCrLbmlFX7mxPA3FJ/3U1oxlZqR7OCi/2Xs3S'),
+    ('Anna', 'Hämäläinen', '3986 Pirkon Kallio', '00300', 'Helsinki', '1983-04-14', 'anna.hamalaine@outlook.com', NULL, '$2y$10$KwH9tEnwivDzd6gX8zttCr43qU.4jHf.zHMxlbfo48WtbEd1ZJeX2'),
+    ('Laura', 'Kivinen', '7654 Hattulantie', '01700', 'Vantaa', '1992-11-23', 'laura.kivinen@gmail.com', NULL, '$2y$10$M5hR5hfVf6iqmGsIvthxQ9ZjKD1bS9tnGnX5vGyYOqX10ZGxwTIV6'),
+    ('Markus', 'Korhonen', '8445 Kamppikatu', '00500', 'Helsinki', '1986-01-05', 'markus.korhonen@aol.com', NULL, '$2y$10$C1HL5wwFN4Xzquk5c7RzOPbXtDtFOemkhR.LCnkDxeThC2cmMGkTm2'),
+    ('Emilia', 'Salminen', '9532 Lehtimäen Katu', '00300', 'Helsinki', '1985-06-19', 'emilia.salminen@icloud.com', NULL, '$2y$10$Q6B5fOuRgAwiIf6b3v6pOLABCEjCJpi6SwrgBy5n0wNlcpKTKi91O'),
+    ('Mikko', 'Lahtinen', '4378 Kiviharjunkuja', '01600', 'Vantaa', '1979-02-14', 'mikko.lahtinen@live.com', NULL, '$2y$10$7.Q.IQlbVyn5bGpYc0cWSFZC8n8a0.1yY5ncdg1/qvpd73Fq6cDQe'),
+    ('Päivi', 'Heikkinen', '3892 Aalto Puisto', '00100', 'Helsinki', '1989-10-27', 'paivi.heikkinen@yahoo.com', NULL, '$2y$10$XEFwi5xxa2FsB0Z5fne2Zt.gFe5joCvws2fvCV1AOEEs0xEVyXT26'),
+    ('Riku', 'Mäkelä', '3927 Petäjäpolku', '00400', 'Helsinki', '1995-07-13', 'riku.makela@gmail.com', NULL, '$2y$10$G.TBoRwnAmNNHjtKVsTbbOC5F1nMvTBsqbePvH7U9erqvFddmga.u'),
+    ('Tiina', 'Ollila', '4974 Tonttukujakatu', '01510', 'Vantaa', '1991-03-10', 'tiina.ollila@outlook.com', NULL, '$2y$10$9joFZog9z1ar4rr4V9wbN6s7l7mJAf9kDpmglA2QchXqmdcfhlqM2'),
+    ('Ville', 'Virtanen', '5967 Viinikkalantie', '01700', 'Vantaa', '1984-12-24', 'ville.virtanen@icloud.com', NULL, '$2y$10$uESl84MEdtfx0APWcQ/5zR4tLgLRGfs1hv8Xbtz7uMt2pSxg2mToK'),
+    ('Liisa', 'Rossi', '3595 Kantakaupunginkatu', '00300', 'Helsinki', '1982-06-05', 'liisa.rossi@hotmail.com', NULL, '$2y$10$0.6NMiHDWrJf0F5Wj4gkdPr3fzYwVqVziDxdXSh6ipRJLO19DuvI6'),
+    ('Kalle', 'Nieminen', '2956 Linnanmäkitie', '00100', 'Helsinki', '1993-08-29', 'kalle.nieminen@gmail.com', NULL, '$2y$10$WUSyq8Omc6/xLvqUWy8nbtdksByAhDOcWlzHGqjk5pX5P7sHhA1vmq'),
+    ('Sari', 'Kallio', '6180 Puistolanaukio', '01510', 'Vantaa', '1980-09-15', 'sari.kallio@aol.com', NULL, '$2y$10$hQgl4dGoE.R90MNCeiJ33nb78s0GjJhUlbmMYWB9dzpqfg1dmCG86'),
+    ('Hannu', 'Pekkanen', '4648 Läntinen Katu', '00200', 'Helsinki', '1977-12-18', 'hannu.pekkanen@live.com', NULL, '$2y$10$GmeFf4lRd0ckPz9.xA91X9LvgW2hQbs.VzE1k0yG9fYofkm2d29uO'),
+    ('Eveliina', 'Soini', '7268 Sipoonkorventie', '01800', 'Vantaa', '1987-05-22', 'eveliina.soini@gmail.com', NULL, '$2y$10$U.Sq7d5pVpK7M02FfSSGq1M43OYggbQj1l7spT5pyCOA42Y1hDceG6'),
+    ('Antti', 'Koskinen', '8360 Kalevankatu', '00400', 'Helsinki', '1990-10-10', 'antti.koskinen@yahoo.com', NULL, '$2y$10$rhmiYgUFi3QCNbhSlkFw9cShUslqUk20c0i5od.0F3G8jFVgw9HhE'),
+    ('Minna', 'Järvinen', '4709 Mannerheimintie', '01600', 'Vantaa', '1986-01-09', 'minna.jarvinen@icloud.com', NULL, '$2y$10$ghf6JS5Qtpw5ga.Hw0V5.W7u8hSld9Ez4wX9wIfJlA8J.V8.5AZSH'),
+    ('Tuomas', 'Hartikainen', '1894 Kalliokatu', '00300', 'Helsinki', '1978-08-22', 'tuomas.hartikainen@outlook.com', NULL, '$2y$10$nbxuJ0Fl5qHlYoGJ9cR2e3FbuV7H8db69LeOW0IqfS9ggUvwQQPyq'),
+    ('Henna', 'Jokinen', '1220 Sipoonkalliontie', '01500', 'Vantaa', '1997-02-19', 'henna.jokinen@gmail.com', NULL, '$2y$10$Fmd6tudMlTkERdoESmc5Ke43iUQHn3XhN3VQzyN7IzclSp0wy7wTS');

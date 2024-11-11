@@ -1,0 +1,130 @@
+.alignment {
+    display: flex;
+    overflow: auto;
+}
+
+.col-left {
+    width: 5%;
+}
+.col-right {
+    width: 5%;
+}
+
+.content-table {
+    flex-grow: 1;
+    text-align: left;
+
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 500px;
+
+    width: 100%;
+
+    border-collapse: separate;
+    border-radius: 20px;
+    word-wrap: break-word;
+    border-spacing: 0;
+}
+
+.content-table thead tr {
+    background: #28bc9a;
+}
+
+
+.content-table thead tr th {
+    padding: 15px;
+    border-radius: 100px;
+}
+
+.content-table tbody tr:nth-child(even){
+    background: #ececec;
+}
+
+.content-table tbody tr:nth-child(even) button{
+    background: #ececec;
+}
+.content-table tbody tr:nth-child(even) button:hover {
+    background: #898989;
+}
+
+.content-table tbody tr:nth-child(even) .edit-buttons .delete {
+    background: #c81212;
+}
+.content-table tbody tr:nth-child(even) .edit-buttons .delete:hover {
+    background: #b21212;
+}
+
+.content-table tbody tr:nth-child(even) .edit-buttons .physical-copies {
+    background: #d2ff41;
+}
+.content-table tbody tr:nth-child(even) .edit-buttons .physical-copies:hover {
+    background: #84a41a;
+}
+.content-table tbody tr:nth-child(even) .edit-buttons .borrow {
+    background: #2adb3c;
+}
+.content-table tbody tr:nth-child(even) .edit-buttons .borrow:hover {
+    background: #15871f;
+}
+
+
+.content-table tbody tr:nth-child(odd){
+    background: #d3d3d3;
+}
+.content-table tbody tr:nth-child(odd) button{
+    background: #d3d3d3;
+}
+.content-table tbody tr:nth-child(odd) button:hover {
+    background: #898989;
+}
+
+.content-table tbody tr:nth-child(odd) .edit-buttons .delete {
+    background: #9c0d0d;
+}
+.content-table tbody tr:nth-child(odd) .edit-buttons .delete:hover {
+    background: #781212;
+}
+
+.content-table tbody tr:nth-child(odd) .edit-buttons .physical-copies {
+    background: #afdb2a;
+}
+.content-table tbody tr:nth-child(odd) .edit-buttons .physical-copies:hover {
+    background: #84a41a;
+}
+.content-table tbody tr:nth-child(odd) .edit-buttons .borrow {
+    background: #1ba42d;
+}
+.content-table tbody tr:nth-child(odd) .edit-buttons .borrow:hover {
+    background: #15871f;
+}
+
+
+.content-table tbody tr th {
+    height: 60px;
+    padding-left: 15px;
+}
+.content-table thead tr .edit-buttons th {
+    padding-left: 0;
+}
+
+.content-table tbody tr:last-child td {
+    border-radius: 0 0 10px 10px;
+}
+
+.edit-buttons {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+}
+
+.edit-buttons button {
+    flex: 1px;
+    height: 100%;
+    margin: 0;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    font-size: 17px;
+
+}

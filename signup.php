@@ -7,8 +7,8 @@
 
             <?php
 
-            if (isset($_GET["error"]))
-                switch ($_GET["error"]){
+            if (isset($_GET["signup"])) {
+                switch ($_GET["signup"]) {
                     case "field_empty":
                         echo "<div class='login-error'><h2>Käyttäjätiliä ei luotu!</h2><p>Täytä pakolliset kohdat</p></div>";
                         break;
@@ -21,12 +21,19 @@
                     case "email_already_exists";
                         echo "<div class='login-error'><h2>Käyttäjätiliä ei luotu!</h2><p>Annettu sähköposti on jo käytössä</p></div>";
                         break;
+                    case "stmt_failure":
+                        echo "<div class='login-error'><h2>Käyttäjätiliä ei luotu!</h2><p>Järjestelmässä tapahtui virhe. Koita uudelleen</p></div>";
+                        break;
+                    case "true":
+                        break;
                     case "none";
-                        header("location: index.php");
-                        exit();
+                        echo "<script>window.location.replace('" . siteURL("index") . "');</script>";
+                        break;
                     default:
+                        echo "<div class='login-error'><h2>Käyttäjätiliä ei luotu!</h2><p>Järjestelmässä tapahtui virhe. Koodi=" . $_GET["signin"] . "</p></div>";
                         break;
                 }
+            }
             ?>
         </div>
 
@@ -91,8 +98,3 @@
         </div>
     </form>
 </div>
-<?php
-if (isset($_GET["signup"])) {
-    echo "<script>signup()</script>";
-}
-?>

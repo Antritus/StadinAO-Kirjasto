@@ -20,8 +20,3 @@
         </div>
     </form>
 </div>
-<?php
-if (isset($_GET["password_reset"])) {
-    echo "<script>signinResetPassword()</script>";
-}
-?>

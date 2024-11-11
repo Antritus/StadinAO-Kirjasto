@@ -18,26 +18,26 @@ if (isset($_POST["submit"])) {
     require_once "functions.bld.php";
 
     if (anyFieldsEmpty($name, $surname, $address, $postcode, $postarea, $email, $birthday, $pswd, $pswdR, $stayLogged)) {
-        header("location: ../index.php?signup=true&error=field_empty");
+        header("location: ../index.php?signup=field_empty");
         exit();
     }
 
-    if (invalidEmail($email)){
-        header("location: ../index.php?signup=true&error=invalid_email");
+    if (invalidEmail($email) === true){
+        header("location: ../index.php?signup=invalid_email");
         exit();
     }
     if (passwordDontMatch($pswd, $pswdR)){
-        header("location: ../index.php?signup=true&error=passwords_dont_match");
+        header("location: ../index.php?signup=passwords_dont_match");
         exit();
     }
 
-    if (emailAlreadyExists($conn, $email)){
-        header("location: ../index.php?signup=true&error=email_already_exists");
+    if (emailAlreadyExists($conn, $email) !== false){
+        header("location: ../index.php?signup=email_already_exists");
         exit();
     }
 
     createUser($conn, $name, $surname, $birthday, $email, $pswd, $address, $postcode, $postarea);
-
+    login($conn, $email, $pswd);
 } else {
     header("location: ../index.php?signup=true");
     exit();
