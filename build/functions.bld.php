@@ -86,25 +86,6 @@ function createUser($conn, $name, $surname, $birthday, $email, $pswd, $address, 
     $strtolower = strtolower($email);
     mysqli_stmt_bind_param($stmt, "sssissss", $name, $surname, $address, $postcode, $postarea, $birthday, $strtolower, $hashPswd);//$hashPswd);
     mysqli_stmt_execute($stmt);
-
-    createPermissions($conn, emailAlreadyExists($conn, $email));
-}
-function createPermissions($conn, $row){
-    $query = "INSERT INTO permissions (id, account) VALUES (?, ?);";
-
-    $stmt = mysqli_stmt_init($conn);
-
-    if (!mysqli_stmt_prepare($stmt, $query)) {
-        header("location: ../index.php?signup=stmt_failure");
-        exit();
-    }
-
-    $id = $row["userid"];
-    $accountLevel = 0;
-    mysqli_stmt_bind_param($stmt, "ii", $id, $accountLevel);
-    mysqli_stmt_execute($stmt);
-
-    header("location: ../index.php?signup=none");
 }
 
 function logInIncl($row) {
@@ -211,4 +192,70 @@ function getBook($conn, $isbn){
         );
     }
     return false;
+}
+
+function createBook(bool|the|mysqli $conn, mixed $name, mixed $author, mixed $publisher, mixed $published, mixed $language, mixed $isbn, mixed $description)
+{
+    $query = "INSERT INTO books (isbn, name, description, language, released, author, publisher) VALUES (?, ?, ?, ?, ?, ?, ?);";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../borrowables.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sssssss", $isbn, $name, $description, $language, $published, $author, $publisher);
+    mysqli_stmt_execute($stmt);
+}
+
+function deleteBook($conn, $isbn)
+{
+    $query = "DELETE FROM books WHERE isbn = ?;";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../borrowables.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $isbn);
+    mysqli_stmt_execute($stmt);
+}
+
+function deleteItems($conn, $isbn)
+{
+    $query = "DELETE FROM item_isbn WHERE isbn = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../borrowables.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $isbn);
+    mysqli_stmt_execute($stmt);
+}
+function getPermission($conn, $id)
+{
+    $query = "SELECT * FROM users WHERE userid = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $id);
+    mysqli_stmt_execute($stmt);
+
+    $resultSet = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultSet)) {
+        return $row["permission"] ?? null;
+    }
+    return 0;
 }

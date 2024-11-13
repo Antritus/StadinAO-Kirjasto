@@ -117,8 +117,16 @@
     display: flex;
     align-items: stretch;
 }
-
-.edit-buttons button {
+.edit-buttons {
+    width: 100%;
+}
+.edit-buttons form {
+    flex: 1px;
+}
+.edit-buttons form button {
+    width: 100%;
+}
+.edit-buttons button{
     flex: 1px;
     height: 100%;
     margin: 0;

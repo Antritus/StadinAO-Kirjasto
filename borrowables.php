@@ -2,7 +2,7 @@
 include_once "init.php";
 requireStyle("../css/manage_users.css");
 requireStyle("../css/bookstable.css");
-
+requireScript("../javascript/book.fc.js");
 
 if ($_SESSION["permission"] < 5){
     header("location: index.php?no_permissions=2");
@@ -13,12 +13,16 @@ include_once "./build/dbh.inc.php";
 include_once "./build/functions.bld.php";
 global $conn;
 $books = getBooks($conn, 0, 100);
-if (!$books){
-    header("location: index.php");
-    exit();
-}
 
 include_once "header.php";
+function permission($permission): bool
+{
+    if ($_SESSION["permission"]>=($permission)) {
+        return true;
+    }
+    return false;
+
+}
 
 function echoIfPermission($permission, $echo) {
     if ($_SESSION["permission"]>=($permission)){
@@ -34,9 +38,16 @@ function echoIfPermission($permission, $echo) {
                 <a href="index.php"><img src="assets/logo.png"></a>
             </div>
             <div class="screen">
+                <?php
+                echo echoIfPermission(5, "
+                <div class='add' onclick='addBook()'>
+                    Lisää Kirja
+                </div>
+");
+                ?>
+
                 <h1>Muokka Kirjoja</h1>
                 <h3>Select Item: <span class="select-account">NONE</span></h3>
-                <div style=""></div>
             </div>
         </div>
         <div class="src">
@@ -64,7 +75,7 @@ function echoIfPermission($permission, $echo) {
                             }
                             $book = $books[$i];
                             echo "
-<tr>
+<tr id='{$book["name"]}'>
     <th>" . htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8') . "</th>
     <th>" . htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8') . "</th>
     <th>" . htmlspecialchars($book['name'], ENT_QUOTES, 'UTF-8') . "</th>
@@ -77,7 +88,13 @@ function echoIfPermission($permission, $echo) {
             <form action='book.php' method='get'>
                 <button class='borrow' type='submit' name='isbn' value='" . htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8') . "'>Manage</button>
             </form>")
-                                . echoIfPermission(10, "<button class='delete'>Delete</button>")
+                                . echoIfPermission(10,
+                                    "
+    <form method='post' action='./build/delete_book.bld.php'>
+        <input type='hidden' name='isbn' value='".htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8')."'>
+        <button type='submit' class='delete' name='submit'>Delete</button>
+    </form>
+    ")
                                 . "
     </th>
 </tr>";
@@ -97,3 +114,7 @@ function echoIfPermission($permission, $echo) {
 <?php
 include_once "footer.php";
 
+if (permission(5)){
+    echo "Hi";
+    include_once "book.fc.php";
+}

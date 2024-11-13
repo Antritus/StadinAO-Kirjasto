@@ -22,6 +22,21 @@
     width: 100%;
 }
 
+.header .add {
+    float: right;
+    width: 15%;
+    text-align: center;
+    border: 1px solid black ;
+    height: 100%;
+    font-size: 50px;
+
+    background: wheat;
+}
+
+.header .add:hover {
+    background: #1ba42d;
+}
+
 .src {
     display: flex;
     width: 100%;

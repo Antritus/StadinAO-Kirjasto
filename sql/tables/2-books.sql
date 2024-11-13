@@ -1,7 +1,7 @@
 CREATE TABLE books (
     isbn VARCHAR(50),
     name VARCHAR(100),
-    description VARCHAR(500),
+    description VARCHAR,
     language VARCHAR(50),
     released VARCHAR(11),
     author VARCHAR(100),

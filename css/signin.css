@@ -60,7 +60,7 @@
 }
 
 /* Full-width inputs */
-.login-screen input[type=text], input[type=password], input[type=date], select, input[type=email] {
+.login-screen input[type=text], input[type=password], input[type=date], select, input[type=email], textarea {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -68,6 +68,12 @@
     border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 4px;
+}
+
+.login-screen textarea {
+    min-height: 100px;
+    height: 250px;
+    resize: none;
 }
 
 .login-screen select {
@@ -137,4 +143,14 @@
     border-bottom: darkred;
     background: #f44336;
     padding: 2%;
+}
+.login-success {
+    border: 1px solid #2adb3c;
+    border-top: darkgreen;
+    border-bottom: darkgreen;
+    background: #2adb3c;
+    padding: 2%;
+}
+.login-screen button {
+    font-size: 17px;
 }
