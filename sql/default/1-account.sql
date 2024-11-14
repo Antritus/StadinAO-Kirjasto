@@ -20,7 +20,19 @@ INSERT INTO users (
           'admin',
              '$2y$10$yJjsQxrL9YhyAoApvXi9nuznsXhzNXQs.PFGRVkAm/i0FBoNERhkm',
           10
-         );
+         ),
+      (
+    'help',
+    'help',
+    '-',
+    '0',
+    '-',
+    '0000-00-00',
+    'help@kirjis.com',
+    'help',
+    '$2y$10$yJjsQxrL9YhyAoApvXi9nuznsXhzNXQs.PFGRVkAm/i0FBoNERhkm',
+    5
+);
 INSERT INTO users (`name`, `sName`, `address`, `postcode`, `postArea`, `birthday`, `email`, `accountName`, `pswd`) VALUES
     ('James', 'Taylor', '4318 Johnsonin Metsä', '01900', 'Vantaa', '1987-09-30', 'james.taylor@example.com', NULL, '$2y$10$gB6FcCiwI1Kdy3m.eCrLbmlFX7mxPA3FJ/3U1oxlZqR7OCi/2Xs3S'),
     ('Anna', 'Hämäläinen', '3986 Pirkon Kallio', '00300', 'Helsinki', '1983-04-14', 'anna.hamalaine@outlook.com', NULL, '$2y$10$KwH9tEnwivDzd6gX8zttCr43qU.4jHf.zHMxlbfo48WtbEd1ZJeX2'),

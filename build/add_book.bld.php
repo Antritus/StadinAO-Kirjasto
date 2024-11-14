@@ -24,7 +24,7 @@ if (isset($_POST["submit"])) {
     require_once "functions.bld.php";
 
     if (anyFieldsEmpty($name, $author, $publisher, $published, $language, $isbn, $description)) {
-        header("location: ../borrowables.php?error=field_empty");
+        header("location: ../books.php?error=field_empty");
         exit();
     }
 
@@ -36,7 +36,7 @@ if (isset($_POST["submit"])) {
     }
 
     createBook($conn, $name, $author, $publisher, $published, $language, $isbn, $description);
-    header("location: ../borrowables.php");
+    header("location: ../books.php");
 } else {
     header("location: ../index.php?ff=");
     exit();

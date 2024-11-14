@@ -22,13 +22,13 @@ if (isset($_POST["submit"])) {
     }
 
     if (anyFieldsEmpty($isbn)) {
-        header("location: ../borrowables.php?error=field_empty");
+        header("location: ../books.php?error=field_empty");
         exit();
     }
 
     deleteBook($conn, $isbn);
     deleteItems($conn, $isbn);
-    header("location: ../borrowables.php?er=er");
+    header("location: ../books.php?er=er");
 } else {
     header("location: ../index.php?ff=");
     exit();

@@ -86,9 +86,9 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
 </div>
                     ";
 
-                if ($_SESSION["permission"] > 5) {
+                if ($_SESSION["permission"] >= 5) {
                     echo "<a class='menu-right' href='edit_accounts.php'>Muokka Tilejä</a>";
-                    echo "<a class='menu-right' href='borrowables.php'>Muokka Kirjoja</a>";
+                    echo "<a class='menu-right' href='books.php'>Muokka Kirjoja</a>";
                 }
             }
         ?>

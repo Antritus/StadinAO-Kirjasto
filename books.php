@@ -21,7 +21,6 @@ function permission($permission): bool
         return true;
     }
     return false;
-
 }
 
 function echoIfPermission($permission, $echo) {
@@ -109,12 +108,9 @@ function echoIfPermission($permission, $echo) {
             </div>
         </div>
     </div>
-
-
 <?php
 include_once "footer.php";
 
 if (permission(5)){
-    echo "Hi";
     include_once "book.fc.php";
 }

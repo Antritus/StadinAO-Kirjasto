@@ -201,7 +201,7 @@ function createBook(bool|the|mysqli $conn, mixed $name, mixed $author, mixed $pu
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $query)) {
-        header("location: ../borrowables.php?error=stmt_failure");
+        header("location: ../books.php?error=stmt_failure");
         exit();
     }
 
@@ -216,12 +216,43 @@ function deleteBook($conn, $isbn)
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $query)) {
-        header("location: ../borrowables.php?error=stmt_failure");
+        header("location: ../books.php?error=stmt_failure");
         exit();
     }
 
     mysqli_stmt_bind_param($stmt, "s", $isbn);
     mysqli_stmt_execute($stmt);
+}
+
+function getInventory($conn, $isbn)
+{
+    $query = "SELECT * FROM item_isbn WHERE isbn = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $isbn);
+    mysqli_stmt_execute($stmt);
+
+    $resultSet = mysqli_stmt_get_result($stmt);
+
+    $i = 0;
+    $items = [];
+    while ($row = mysqli_fetch_assoc($resultSet)) {
+        $items[$i] = array(
+            "isbn"=> $row["isbn"] ?? null,
+            "id"=>$row["id"] ?? null,
+            "borrower" => $row["borrowed"] ?? null,
+            "borrow_start"=>$row["dateBorrowed"] ?? null,
+            "borrow_end" => $row["licenseEnds"] ?? null
+        );
+        $i++;
+    }
+    return $items;
 }
 
 function deleteItems($conn, $isbn)
@@ -231,7 +262,7 @@ function deleteItems($conn, $isbn)
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $query)) {
-        header("location: ../borrowables.php?error=stmt_failure");
+        header("location: ../books.php?error=stmt_failure");
         exit();
     }
 
@@ -259,3 +290,4 @@ function getPermission($conn, $id)
     }
     return 0;
 }
+

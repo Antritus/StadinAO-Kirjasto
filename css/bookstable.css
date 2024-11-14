@@ -1,6 +1,6 @@
 .alignment {
     display: flex;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .col-left {
@@ -135,4 +135,11 @@
     text-align: center;
     font-size: 17px;
 
+}
+
+.borrowed-false {
+    color: red;
+}
+.borrowed-true {
+    color: red;
 }

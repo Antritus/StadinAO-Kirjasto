@@ -3,5 +3,6 @@ CREATE TABLE item_isbn (
     isbn VARCHAR(50),
     borrowed INTEGER,
     dateBorrowed VARCHAR(11),
+    licenseEnds VARCHAR(11),
     PRIMARY KEY(id)
 );

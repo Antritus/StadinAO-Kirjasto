@@ -1,0 +1,71 @@
+.screen {
+    background: #e7e7e7;
+    align-items: center;
+}
+.alignment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.book-container {
+    margin-top: 1%;
+    width: 100%;
+    border: 3px solid #c3c3c3;
+    background: #efefef;
+    height: 90vh;
+    padding: 6px 10px 10px;
+    max-width: 1200px;
+}
+.col-left {
+    width: 0;
+}
+
+.col-right {
+    width: 0;
+}
+
+
+.book-container-inner {
+    margin: 0.05%;
+    width: 100%;
+    background: #aaa;
+    border-radius: 5px;
+    height: 100%;
+    padding: 12px;
+}
+
+.book-header {
+    border: 2px solid #c5c5c5;
+    margin-top: 0.5%;
+    width: 100%;
+    height: 40%;
+    background: #eee;
+}
+.header-left {
+}
+.header-right {
+
+}
+.book-footer {
+    border: 2px solid #c5c5c5;
+    margin-top: 0.5%;
+    width: 100%;
+    height: 58%;
+    background: #eee;
+    padding: 8px;
+}
+
+.content-table tbody tr:nth-child(odd) .edit-buttons .return {
+    background: #1ca4b7;
+}
+.content-table tbody tr:nth-child(odd) .edit-buttons .return:hover {
+    background: #117889;
+}
+.content-table tbody tr:nth-child(even) .edit-buttons .return {
+    background: #1fc0d9;
+}
+.content-table tbody tr:nth-child(even) .edit-buttons .return:hover {
+    background: #117889;
+}
