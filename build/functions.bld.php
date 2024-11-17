@@ -254,6 +254,33 @@ function getInventory($conn, $isbn)
     }
     return $items;
 }
+function getItem($conn, $isbn, $isbnItem)
+{
+    $query = "SELECT * FROM item_isbn WHERE isbn = ? AND id = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $isbn, $isbnItem);
+    mysqli_stmt_execute($stmt);
+
+    $resultSet = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultSet)) {
+        return array(
+            "isbn"=> $row["isbn"] ?? null,
+            "id"=>$row["id"] ?? null,
+            "borrower" => $row["borrowed"] ?? null,
+            "borrow_start"=>$row["dateBorrowed"] ?? null,
+            "borrow_end" => $row["licenseEnds"] ?? null
+        );
+    }
+    return null;
+}
 
 function deleteItems($conn, $isbn)
 {
@@ -291,3 +318,105 @@ function getPermission($conn, $id)
     return 0;
 }
 
+function addBookCopy($conn, $isbn, $isbnBook): void
+{
+    $query = "INSERT INTO item_isbn (id, isbn) VALUES (?, ?);";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../book.php?error=stmt_failure&isbn=$isbn");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $isbnBook, $isbn);
+    mysqli_stmt_execute($stmt);
+}
+
+function isBorrowed($conn, $isbn, $isbnBook) : bool{
+    $query = "SELECT * FROM item_isbn WHERE id = ? AND isbn = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../book.php?error=stmt_failure&isbn=$isbn");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $isbnBook, $isbn);
+    mysqli_stmt_execute($stmt);
+
+    $resultSet = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultSet)) {
+        if (isset($row["borrowed"])){
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+function extendBorrow($conn, $isbn, $isbnBook, $newDate): void
+{
+    $query = "UPDATE item_isbn SET licenseEnds = ? WHERE id = ? AND isbn = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../book.php?error=stmt_failure&isbn=$isbn");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sss", $newDate, $isbnBook, $isbn);
+    mysqli_stmt_execute($stmt);
+}
+function borrow($conn, $account, $isbn, $isbnBook, $returnDate): void
+{
+    $query = "UPDATE item_isbn SET borrowed = ?, dateBorrowed = ?, licenseEnds = ? WHERE id = ? AND isbn = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../book.php?error=stmt_failure&isbn=$isbn");
+        exit();
+    }
+
+    $dateToday = date("Y-m-d");
+
+    mysqli_stmt_bind_param($stmt, "issss", $account, $dateToday, $returnDate, $isbnBook, $isbn);
+    mysqli_stmt_execute($stmt);
+}
+function itemIsbnExists($conn, $isbn, $isbnBook){
+    $query = "SELECT * FROM item_isbn WHERE id = ? AND isbn = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../book.php?error=stmt_failure&isbn=$isbn");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $isbnBook, $isbn);
+    mysqli_stmt_execute($stmt);
+
+    $resultSet = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultSet)) {
+        return true;
+    }
+    return false;
+}
+function cancelBorrow(bool|the|mysqli $conn, mixed $isbn, mixed $isbnBook): void
+{
+    $query = "UPDATE item_isbn SET borrowed = NULL, dateBorrowed = NULL, licenseEnds = NULL WHERE id = ? AND isbn = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../book.php?error=stmt_failure&isbn=$isbn");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $isbnBook, $isbn);
+    mysqli_stmt_execute($stmt);
+}

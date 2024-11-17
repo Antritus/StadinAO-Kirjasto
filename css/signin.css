@@ -76,9 +76,27 @@
     resize: none;
 }
 
+.login-screen select:disabled {
+    background-color: lightgray;
+    color: black;
+    border: none;
+}
+.login-screen input:read-only {
+    background-color: lightgray;
+    color: black;
+    border: none;
+}
+
+.login-screen textarea:read-only {
+    background-color: lightgray;
+    border: none;
+}
+
 .login-screen select {
     background-color: white;
 }
+
+
 
 /* Set a style for all buttons */
 .login-screen button {
@@ -104,6 +122,11 @@
     background-color: #f44336;
     border-radius: 4px;
 }
+.login-screen .cancel-red {
+    background-color: #b0281e;
+}
+
+
 
 /* Center the avatar image inside this container */
 .login-screen .imgcontainer {

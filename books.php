@@ -2,7 +2,7 @@
 include_once "init.php";
 requireStyle("../css/manage_users.css");
 requireStyle("../css/bookstable.css");
-requireScript("../javascript/book.fc.js");
+requireScript("../javascript/popups/books.js");
 
 if ($_SESSION["permission"] < 5){
     header("location: index.php?no_permissions=2");
@@ -39,14 +39,13 @@ function echoIfPermission($permission, $echo) {
             <div class="screen">
                 <?php
                 echo echoIfPermission(5, "
-                <div class='add' onclick='addBook()'>
+                <button class='add' onclick='addBook()'>
                     Lisää Kirja
-                </div>
+                </button>
 ");
                 ?>
 
-                <h1>Muokka Kirjoja</h1>
-                <h3>Select Item: <span class="select-account">NONE</span></h3>
+                <h1>Muokkaa Kirjoja</h1>
             </div>
         </div>
         <div class="src">
@@ -57,12 +56,12 @@ function echoIfPermission($permission, $echo) {
                         <thead>
                         <tr>
                             <th>ISBN</th>
-                            <th>Author</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Language</th>
-                            <th>Publisher</th>
-                            <th>Released</th>
+                            <th>Kirjoittaja</th>
+                            <th>Nimi</th>
+                            <th>Kuvaus</th>
+                            <th>Kieli</th>
+                            <th>Julkaisija</th>
+                            <th>Julkaistu</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -85,16 +84,22 @@ function echoIfPermission($permission, $echo) {
     <th class='edit-buttons'>"
                                 . echoIfPermission(5, "
             <form action='book.php' method='get'>
-                <button class='borrow' type='submit' name='isbn' value='" . htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8') . "'>Manage</button>
+                <button class='borrow' type='submit' name='isbn' value='" . htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8') . "'>Muokkaa</button>
             </form>")
                                 . echoIfPermission(10,
                                     "
+        <button type='submit' class='delete' name='submit' onclick='".js("deleteBook", htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['name'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['description'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['language'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['publisher'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['released'], ENT_QUOTES, 'UTF-8'))."'
+        >Poista Järjestelmästä</button>
+"
+                                    /*
     <form method='post' action='./build/delete_book.bld.php'>
         <input type='hidden' name='isbn' value='".htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8')."'>
-        <button type='submit' class='delete' name='submit'>Delete</button>
+        <button type='submit' class='delete' name='submit'>Poista</button>
     </form>
     ")
-                                . "
+                                                                        */
+                                    );
+                                echo "
     </th>
 </tr>";
 
@@ -112,5 +117,8 @@ function echoIfPermission($permission, $echo) {
 include_once "footer.php";
 
 if (permission(5)){
-    include_once "book.fc.php";
+    include_once "books.add.popup.php";
+    if (permission(10)){
+        include_once "books.delete.popup.php";
+    }
 }

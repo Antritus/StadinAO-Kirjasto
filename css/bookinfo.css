@@ -57,6 +57,7 @@
     padding: 8px;
 }
 
+
 .content-table tbody tr:nth-child(odd) .edit-buttons .return {
     background: #1ca4b7;
 }
@@ -68,4 +69,32 @@
 }
 .content-table tbody tr:nth-child(even) .edit-buttons .return:hover {
     background: #117889;
+}
+
+
+.content-table tbody tr:nth-child(odd) .edit-buttons .last-chance {
+    background: #b72c1c;
+}
+.content-table tbody tr:nth-child(odd) .edit-buttons .last-chance:hover {
+    background: #841e15;
+}
+.content-table tbody tr:nth-child(even) .edit-buttons .last-chance {
+    background: #b92216;
+}
+.content-table tbody tr:nth-child(even) .edit-buttons .last-chance:hover {
+    background: #73221a;
+}
+
+
+.book-header {
+    display: flex;
+}
+.book-header .info {
+    flex: 1;
+}
+.book-header .description {
+    width: 50%;
+}
+.book-container .book-header .info {
+    font-size: 20px;
 }

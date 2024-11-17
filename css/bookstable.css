@@ -116,8 +116,6 @@
     height: 100%;
     display: flex;
     align-items: stretch;
-}
-.edit-buttons {
     width: 100%;
 }
 .edit-buttons form {
@@ -134,12 +132,35 @@
     padding: 10px;
     text-align: center;
     font-size: 17px;
-
 }
 
 .borrowed-false {
-    color: red;
+    color: #c00000;
 }
 .borrowed-true {
-    color: red;
+    color: #32a61a;
+}
+
+.add-element {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+.add-element form {
+    flex: 1px;
+}
+.add-element form button {
+    width: 100%;
+}
+.add-element button{
+    flex: 1px;
+    height: 100%;
+    margin: 0;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    font-size: 17px;
+    background: #4dff5f;
 }

@@ -12,32 +12,31 @@ if (isset($_POST["submit"])) {
     }
 
     // Get submitted data from the signup form
-    $name = $_POST["book-name"];
-    $author = $_POST["author"];
-    $publisher = $_POST["publisher"];
-    $published = $_POST["published"];
-    $language = $_POST["language"];
-    $isbn = $_POST["isbn"];
-    $description = $_POST["description"];
+    $isbn = $_POST["add-isbn"];
+    $isbnBook = $_POST["add-isbn-book"];
 
     require_once "dbh.inc.php";
     require_once "functions.bld.php";
 
-    if (anyFieldsEmpty($name, $author, $publisher, $published, $language, $isbn, $description)) {
-        header("location: ../books.php?error=field_empty");
+    if (anyFieldsEmpty($isbn, $isbnBook)) {
+        header("location: ../book.php?error=field_empty&isbn=$isbn");
         exit();
     }
 
-    $isbn = $_POST["isbn"];
+    if (itemIsbnExists($conn, $isbn, $isbnBook)){
+        header("location: ../book.php?error=isbn_already_exists&isbn={$_POST["add-isbn"]}");
+        exit();
+    }
+
     $permission = getPermission($conn, $_SESSION["id"]);
     if ($permission < 5){ // No permission
         header("location: ../index.php");
         exit();
     }
 
-    createBook($conn, $name, $author, $publisher, $published, $language, $isbn, $description);
-    header("location: ../books.php");
+    addBookCopy($conn, $isbn, $isbnBook);
+    header("location: ../book.php?isbn=$isbn");
 } else {
-    header("location: ../index.php?ff=");
+    header("location: ../index.php");
     exit();
 }

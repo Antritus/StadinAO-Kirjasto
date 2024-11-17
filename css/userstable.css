@@ -114,5 +114,29 @@
     padding: 10px;
     text-align: center;
     font-size: 17px;
+    width: 100%;
+}
 
+.add-element {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+.add-element form {
+    flex: 1px;
+}
+.add-element form button {
+    width: 100%;
+}
+.add-element button{
+    flex: 1px;
+    height: 100%;
+    margin: 0;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    font-size: 17px;
+    background: #4dff5f;
 }

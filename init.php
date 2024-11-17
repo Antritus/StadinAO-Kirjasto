@@ -34,3 +34,22 @@ function requiredScripts(): array
     global $requiredScripts;
     return  $requiredScripts;
 }
+
+function js($function, ...$params) {
+    $fn = $function . "(";
+    $first = true;
+    foreach ($params as $param) {
+        if (!$first) {
+            $fn .= ",";
+        }
+        $fn .= "\"".$param."\"";
+        $first = false;
+    }
+    return $fn . ")";
+}
+
+function dateFromNow($add) : string{
+    $dateReal = new DateTime();
+    $dateReal->modify($add);
+    return $dateReal->format("Y-m-d");
+}

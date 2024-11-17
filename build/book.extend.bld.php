@@ -11,25 +11,31 @@ if (isset($_POST["submit"])) {
         exit();
     }
 
+    $isbn = $_POST["extend-isbn"];
+    $isbnBook = $_POST["extend-isbn-book"];
+    $date = $_POST["extend-return-date"];
+
     require_once "dbh.inc.php";
     require_once "functions.bld.php";
 
-    $isbn = $_POST["isbn"];
+    if (anyFieldsEmpty($isbn, $date)) {
+        header("location: ../book.php?error=field_empty&isbn=$isbn");
+        exit();
+    }
+
     $permission = getPermission($conn, $_SESSION["id"]);
     if ($permission < 5){ // No permission
         header("location: ../index.php");
         exit();
     }
 
-    if (anyFieldsEmpty($isbn)) {
-        header("location: ../books.php?error=field_empty");
-        exit();
+    if (!isBorrowed($conn, $isbn, $isbnBook)) {
+        header("location: ../book.php?error=book_is_not_borrowed&isbn=$isbn&bookIsbn=$isbnBook");
     }
 
-    deleteBook($conn, $isbn);
-    deleteItems($conn, $isbn);
-    header("location: ../books.php?er=er");
+    extendBorrow($conn, $isbn, $isbnBook, $date);
+    header("location: ../book.php?isbn={$_POST["borrow-isbn"]}");
 } else {
-    header("location: ../index.php?ff=");
+    header("location: ../index.php");
     exit();
 }

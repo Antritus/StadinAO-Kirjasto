@@ -18,7 +18,7 @@ include_once "build/functions.bld.php";
         }
     ?>
     <script src="javascript/animated_text.js"></script>
-    <script src="javascript/signin.js"></script>
+    <script src="javascript/popups/signin.js"></script>
     <script src="javascript/menu.js"></script>
     <?php
     $scripts = requiredScripts();
