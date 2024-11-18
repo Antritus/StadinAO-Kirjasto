@@ -10,5 +10,6 @@ CREATE TABLE accounts(
     accountName VARCHAR(20) NOT NULL,
     pswd VARCHAR(1000) NOT NULL,
     permission INT DEFAULT 0 NOT NULL,
+    category DEFAULT 'Book',
     PRIMARY KEY (userid)
 );

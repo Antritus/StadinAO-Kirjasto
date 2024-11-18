@@ -166,7 +166,7 @@ function getBooks($conn, $start, $end) {
 }
 
 function getBook($conn, $isbn){
-    $query = "SELECT * FROM books WHERE isbn = ?";
+    $query = "SELECT * FROM books WHERE isbn = ? AND category = 'Book'";
 
     $stmt = mysqli_stmt_init($conn);
 
@@ -194,7 +194,7 @@ function getBook($conn, $isbn){
     return false;
 }
 
-function createBook(bool|the|mysqli $conn, mixed $name, mixed $author, mixed $publisher, mixed $published, mixed $language, mixed $isbn, mixed $description)
+function createBook($conn, mixed $name, mixed $author, mixed $publisher, mixed $published, mixed $language, mixed $isbn, mixed $description)
 {
     $query = "INSERT INTO books (isbn, name, description, language, released, author, publisher) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
@@ -206,6 +206,20 @@ function createBook(bool|the|mysqli $conn, mixed $name, mixed $author, mixed $pu
     }
 
     mysqli_stmt_bind_param($stmt, "sssssss", $isbn, $name, $description, $language, $published, $author, $publisher);
+    mysqli_stmt_execute($stmt);
+}
+function createItem($conn, mixed $isbn, mixed $name, mixed $description, $released, mixed $brand, $category)
+{
+    $query = "INSERT INTO books (isbn, name, description, released, publisher, category) VALUES (?, ?, ?, ?, ?, ?)";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../books.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ssssss", $isbn, $name, $description, $released, $brand, $category);
     mysqli_stmt_execute($stmt);
 }
 
