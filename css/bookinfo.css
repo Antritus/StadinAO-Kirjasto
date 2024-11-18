@@ -6,7 +6,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .book-container {
@@ -14,9 +13,9 @@
     width: 100%;
     border: 3px solid #c3c3c3;
     background: #efefef;
-    height: 90vh;
     padding: 6px 10px 10px;
     max-width: 1200px;
+    border-radius: 10px;
 }
 .col-left {
     width: 0;
@@ -35,28 +34,6 @@
     height: 100%;
     padding: 12px;
 }
-
-.book-header {
-    border: 2px solid #c5c5c5;
-    margin-top: 0.5%;
-    width: 100%;
-    height: 40%;
-    background: #eee;
-}
-.header-left {
-}
-.header-right {
-
-}
-.book-footer {
-    border: 2px solid #c5c5c5;
-    margin-top: 0.5%;
-    width: 100%;
-    height: 58%;
-    background: #eee;
-    padding: 8px;
-}
-
 
 .content-table tbody tr:nth-child(odd) .edit-buttons .return {
     background: #1ca4b7;
@@ -97,4 +74,173 @@
 }
 .book-container .book-header .info {
     font-size: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal-content {
+    overflow: auto;
+    background-color: #fefefe;
+    margin: 5px auto;
+    border: 1px solid #888;
+    width: 100%;
+    border-radius: 10px;
+    height: 100%;
+}
+
+
+/* Bordered form */
+.book-container form, .book-container .non-form {
+    border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+.book-container input[type=text], input[type=password], input[type=date], select, input[type=email], textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.book-container textarea {
+    min-height: 100px;
+    height: 250px;
+    resize: none;
+}
+
+.book-container select:disabled {
+    background-color: lightgray;
+    color: black;
+    border: none;
+}
+.book-container input:read-only {
+    background-color: lightgray;
+    color: black;
+    border: none;
+}
+
+.book-container textarea:read-only {
+    background-color: lightgray;
+    border: none;
+}
+
+.book-container select {
+    background-color: white;
+}
+
+
+
+/* Set a style for all buttons */
+.book-container button {
+    background-color: #29d1b1;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+}
+
+/* Add a hover effect for buttons */
+.book-container button:hover {
+    opacity: 0.8;
+}
+
+/* Extra style for the cancel button (red) */
+.book-container .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+    border-radius: 4px;
+}
+.book-container .cancel-red {
+    background-color: #b0281e;
+}
+
+
+
+.book-container .imgcontainer {
+    text-align: left;
+    margin: 24px 0 12px 12px;
+}
+
+/* Avatar image */
+.book-container img.avatar {
+    width: 60%;
+    border-radius: 50%;
+}
+
+/* Add padding to containers */
+.book-container .container {
+    padding: 16px;
+}
+
+/* The "Forgot password" text */
+.book-container span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+.book-container span.psw .selectable {
+    color: blue;
+    text-decoration: underline;
+}
+.book-container span.psw .selectable:hover {
+    color: darkblue;
+    cursor: pointer;
+}
+
+.login-error {
+    border: 1px solid #f44336;
+    border-top: darkred ;
+    border-bottom: darkred;
+    background: #f44336;
+    padding: 2%;
+}
+.login-success {
+    border: 1px solid #2adb3c;
+    border-top: darkgreen;
+    border-bottom: darkgreen;
+    background: #2adb3c;
+    padding: 2%;
+}
+.book-container button {
+    font-size: 17px;
+}
+
+.book-img {
+    width: 40%;
+}
+.book-img img {
+    width: 90%;
+    height: 90%
+}
+
+.right-side {
+    margin-left: 2%;
+    padding-left: 2%;
 }

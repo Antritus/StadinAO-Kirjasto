@@ -1,5 +1,5 @@
 <div id="extend-book" class="modal login-screen">
-    <form class="modal-content animate" method="post" action="build/book.borrow.bld.php">
+    <form class="modal-content animate" method="post" action="build/book.extend.bld.php">
         <div class="imgcontainer">
             <h1>Pidennä Lainausta</h1>
 
