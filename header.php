@@ -43,27 +43,6 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
 ?>
 <header>
     <nav class="menu">
-        <a href="<?php siteURL("borrow") ?>">
-            <div class="menu-left">Lainaa</div>
-        </a>
-        <div class="menu-left">
-            <!-- <i class="fa-regular fa-caret-down"></i> --!>
-            <span>Varaa <span class="open-status"><i class="fa-solid fa-caret-right"></i></span></span>
-            <div class="submenu">
-                <a href="<?php siteURL("reserve/book")?>"><div>Kirja</div></a>
-                <a href="<?php siteURL("reserve/room")?>"><div>Huone</div></a>
-                <a href="<?php siteURL("reserve/item")?>"><div>Työkalu / Väline</div></a>
-                <a href="<?php siteURL("reserve/movie")?>"><div>Elokuva</div></a>
-            </div>
-        </div>
-
-        <a href="<?php siteURL("return") ?>">
-            <div class="menu-left">Palauta</div>
-        </a>
-        <a href="<?php siteURL("wish_box") ?>">
-            <div class="menu-left">Toivelaatikko</div>
-        </a>
-
         <?php
             if (!$LOGGED_IN){
                 echo "
@@ -87,8 +66,10 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
                     ";
 
                 if ($_SESSION["permission"] >= 5) {
-                    echo "<a class='menu-right' href='edit_accounts.php'>Muokka Tilejä</a>";
-                    echo "<a class='menu-right' href='books.php'>Muokka Kirjoja</a>";
+                    echo "<a class='menu-left' href='books.php'>Kirjat</a>";
+                    echo "<a class='menu-left' href='items.php'>Tavarat</a>";
+
+                    echo "<a class='menu-right' href='edit_accounts.php'>Tilit</a>";
                 }
             }
         ?>
@@ -99,9 +80,9 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
 <?php
 
 if (!$LOGGED_IN) {
-    include_once "signin.php";
-    include_once "signin-reset-password.php";
-    include_once "signup.php";
+    include_once "signin.popup.php";
+    include_once "signin-reset-password.popup.php";
+    include_once "signup.popup.php";
 
     if (isset($_GET["signup"]) && !$_GET["signup"] != "none") {
         echo "<script>signup()</script>";
@@ -116,5 +97,10 @@ if (!$LOGGED_IN) {
 
 <script>
     submenus();
+    <?php
+        if (!$LOGGED_IN) {
+            echo "signin();";
+        }
+    ?>
 </script>
 <?php

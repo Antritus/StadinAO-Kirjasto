@@ -111,6 +111,10 @@
     border-radius: 0 0 10px 10px;
 }
 
+.content-table tbody tr td:last-child {
+    max-width: 150px;
+}
+
 .edit-buttons {
     text-align: center;
     height: 100%;

@@ -15,12 +15,13 @@ if (isset($_POST["submit"])) {
     $isbnBook = $_POST["borrow-book-isbn"];
     $account = $_POST["borrow-account"];
     $date = $_POST["borrow-return_date"];
+    $return = $_POST["return"];
 
     require_once "dbh.inc.php";
     require_once "functions.bld.php";
 
     if (anyFieldsEmpty($isbn, $date, $isbn, $isbnBook, $account)) {
-        header("location: ../book.php?error=field_empty&isbn=$isbn");
+        header("location: ../$return?error=field_empty&isbn=$isbn");
         exit();
     }
 
@@ -31,11 +32,11 @@ if (isset($_POST["submit"])) {
     }
 
     if (isBorrowed($conn, $isbn, $isbnBook)) {
-        header("location: ../book.php?error=book_is_not_borrowed&isbn=$isbn&bookIsbn=$isbnBook");
+        header("location: ../$return?error=book_is_not_borrowed&isbn=$isbn&bookIsbn=$isbnBook");
     }
 
     borrow($conn, $account, $isbn, $isbnBook, $date);
-    header("location: ../book.php?isbn={$_POST["borrow-isbn"]}");
+    header("location: ../$return?isbn={$_POST["borrow-isbn"]}");
 } else {
     header("location: ../index.php");
     exit();

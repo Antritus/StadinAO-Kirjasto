@@ -1,6 +1,6 @@
 <div id="return-book" class="modal login-screen">
     <form class="modal-content animate" method="post" action="build/book.return.bld.php">
-        <input readonly hidden name="return" id="return" value="book.php">
+        <input readonly hidden name="return" id="return" value="item.php">
         <div class="imgcontainer">
             <h1>Palauta Kirja</h1>
 
@@ -30,7 +30,7 @@
 
         <div class="container">
             <div style="display: inline">
-                <label for="return-book-name"><b>Kirja</b></label>
+                <label for="return-book-name"><b>Esineen Nimi</b></label>
                 <input readonly type="text" placeholder="Kirjan nimi..." name="return-book-name" id="return-book-name" required>
             </div>
             <div style="display: inline">

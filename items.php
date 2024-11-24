@@ -12,7 +12,11 @@ if ($_SESSION["permission"] < 5){
 include_once "./build/dbh.inc.php";
 include_once "./build/functions.bld.php";
 global $conn;
-$books = getBooks($conn, 0, 100);
+$books = getItems($conn, 0, 100);
+
+if (isset($_GET["category"])){
+    $books = getItemsByCategory($conn, 0, 100, $_GET["category"]);
+}
 
 include_once "header.php";
 
@@ -48,12 +52,12 @@ function echoIfNoPermission($permission, $echo) {
                 <?php
                 echo echoIfPermission(5, "
                 <button class='add' onclick='addBook()'>
-                    Lisää Kirja
+                    Lisää Tavara
                 </button>
 ");
                 ?>
 
-                <h1>Kirjat</h1>
+                <h1>Tavarat ja kapistukset</h1>
             </div>
         </div>
         <div class="src">
@@ -64,12 +68,11 @@ function echoIfNoPermission($permission, $echo) {
                         <thead>
                         <tr>
                             <th>ISBN</th>
-                            <th>Kirjoittaja</th>
+                            <th>Kategoria</th>
                             <th>Nimi</th>
                             <th>Kuvaus</th>
-                            <th>Kieli</th>
-                            <th>Julkaisija</th>
-                            <th>Julkaistu</th>
+                            <th>Merkki</th>
+                            <th>vuosimalli</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -83,29 +86,21 @@ function echoIfNoPermission($permission, $echo) {
                             echo "
 <tr id='{$book["name"]}'>
     <th>" . htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8') . "</th>
-    <th>" . htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8') . "</th>
+    <th>" . htmlspecialchars($book['category'], ENT_QUOTES, 'UTF-8') . "</th>
     <th>" . htmlspecialchars($book['name'], ENT_QUOTES, 'UTF-8') . "</th>
     <th>" . htmlspecialchars($book['description'], ENT_QUOTES, 'UTF-8') . "</th>
-    <th>" . htmlspecialchars($book['language'], ENT_QUOTES, 'UTF-8') . "</th>
     <th>" . htmlspecialchars($book['publisher'], ENT_QUOTES, 'UTF-8') . "</th>
     <th>" . htmlspecialchars($book['released'], ENT_QUOTES, 'UTF-8') . "</th>
     <th class='edit-buttons'>"
                                 . echoIfPermission(5, "
-            <form action='book.php' method='get'>
-                <button class='borrow' type='submit' name='isbn' value='" . htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8') . "'>Muokkaa</button>
+            <form action='item.php' method='get'>
+                <input hidden name='isbn' value='" . htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8') . "' id='isbn'>
+                <button class='borrow' type='submit'>Muokkaa</button>
             </form>")
                                 . echoIfPermission(10,
                                     "
         <button type='submit' class='delete' name='submit' onclick='".js("deleteBook", htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['name'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['description'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['language'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['publisher'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['released'], ENT_QUOTES, 'UTF-8'))."'
-        >Poista Järjestelmästä</button>
-"
-                                    /*
-    <form method='post' action='./build/delete_book.bld.php'>
-        <input type='hidden' name='isbn' value='".htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8')."'>
-        <button type='submit' class='delete' name='submit'>Poista</button>
-    </form>
-    ")
-                                                                        */
+        >Poista Järjestelmästä</button>"
                                     );
                                 echo "
     </th>
@@ -124,10 +119,12 @@ function echoIfNoPermission($permission, $echo) {
 <?php
 
 if (permission(5)){
-    include_once "books.add.popup.php";
+    include_once "items.add.popup.php";
     if (permission(10)){
-        include_once "books.delete.popup.php";
+        include_once "items.delete.popup.php";
     }
 }
 
+
 include_once "footer.php";
+

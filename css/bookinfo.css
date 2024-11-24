@@ -244,3 +244,11 @@
     margin-left: 2%;
     padding-left: 2%;
 }
+
+.item-path a {
+    text-decoration: none;
+    color: #2899bc;
+}
+.item-path a:visited {
+    color: #2899bc;
+}

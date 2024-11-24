@@ -47,6 +47,6 @@ window.onclick = function(event) {
     if (event.target == signinElement
         || event.target == signupElement
         || event.target == signinPasswordResetElement) {
-        clearLoginSignup();
+        //clearLoginSignup();
     }
 }

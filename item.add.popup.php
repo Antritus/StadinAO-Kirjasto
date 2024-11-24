@@ -1,6 +1,6 @@
 <div id="add-book" class="modal login-screen">
     <form class="modal-content animate" method="post" action="build/book.add.bld.php">
-        <input readonly hidden name="return" id="return" value="book.php">
+        <input readonly hidden name="return" id="return" value="item.php">
         <div class="imgcontainer">
             <h1>Lisää Kopio</h1>
 
@@ -30,8 +30,8 @@
 
         <div class="container">
             <div style="display: inline">
-                <label for="add-book-name"><b>Kirja</b></label>
-                <input readonly type="text" placeholder="Kirjan nimi..." name="add-book-name" id="add-book-name" required>
+                <label for="add-book-name"><b>Nimi</b></label>
+                <input readonly type="text" placeholder="Nimi..." name="add-book-name" id="add-book-name" required>
             </div>
             <div style="display: inline">
                 <div style="float: left; width: 49.5%; margin-right: 1%">
@@ -54,10 +54,3 @@
         </div>
     </form>
 </div>
-
-<?php
-if (isset($_GET["error"]) && $_GET["error"] == "isbn_already_exists"){
-    global $conn;
-    $book = getBook($conn, $_GET["isbn"]);
-    echo "<script>".js("addBook", $book["isbn"], $book["name"])."</script>";
-}

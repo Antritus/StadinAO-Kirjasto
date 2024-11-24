@@ -19,6 +19,7 @@
     border: 1px solid #888;
     width: 40%;
     border-radius: 10px;
+    height: auto;
 }
 
 .login-screen .close {

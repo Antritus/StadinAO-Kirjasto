@@ -34,21 +34,16 @@
                 <input readonly type="text" placeholder="Kirjan nimi..." name="add-book-name" id="add-book-name" required>
             </div>
             <div style="display: inline">
-                <div style="float: left; width: 49.5%; margin-right: 1%">
-                    <label for="add-isbn"><b>ISBN</b></label>
-                    <input readonly type="text" placeholder="ISBN..." name="add-isbn" id="add-isbn" required>
-                </div>
-                <div style="float: right; width: 49.5%;">
-                    <label for="add-isbn-book"><b>ISBN (Esine)</b></label>
-                    <input type="text" placeholder="ISBN..." name="add-isbn-book" id="add-isbn-book" required>
-                </div>
+                <label for="add-isbn"><b>ISBN</b></label>
+                <input readonly type="text" placeholder="ISBN..." name="add-isbn" id="add-isbn" required>
             </div>
             <div style="display: inline">
-                <label for="add-description"></label>
-                <textarea name="add-description" id="add-description" placeholder="Extra tietoa..."></textarea>
+                <label for="add-isbn-book"><b>ISBN</b></label>
+                <input type="text" placeholder="ISBN..." name="add-isbn-book" id="add-isbn-book" required>
             </div>
             <button type="submit" name="submit">Lisää Kopio</button>
         </div>
+
         <div class="container" style="background-color:#f1f1f1">
             <button type="button" onclick="clearAdd()" class="cancelbtn">Cancel</button>
         </div>

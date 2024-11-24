@@ -1,8 +1,8 @@
 <div id="add-book" class="modal login-screen">
-    <form class="modal-content animate" method="post" action="build/books.add.bld.php">
-        <input readonly hidden name="return" id="return" value="books.php">
+    <form class="modal-content animate" method="post" action="build/items.add.bld.php">
+        <input readonly hidden name="return" id="return" value="items.php">
         <div class="imgcontainer">
-            <h1>Lisää Kirja</h1>
+            <h1>Lisää Esine</h1>
 
 
             <?php
@@ -28,26 +28,35 @@
 
         <div class="container" style="margin-left:">
             <div style="display: inline">
-                <label for="add-book-name"><b>Kirjan Nimi</b></label>
-                <input type="text" placeholder="Kirjan nimi..." name="add-book-name" id="add-book-name" required>
+                <div style="float: left; width: 49.5%; margin-right: 1%">
+                    <label for="add-book-name">Esineen Nimi</label>
+                    <input type="text" placeholder="Esineen nimi..." name="add-book-name" id="add-book-name" required>
+                </div>
+                <div style="float: left; width: 49.5%;">
+                    <label for="add-category">Kategoria</label>
+                    <select id="add-category" name="add-category">
+                        <option value="Tools" selected>Työkalut</option>
+                        <option value="Home">Koti</option>
+                        <option value="Players">Soitin (Laite)</option>
+                        <option value="Library">Kirjasto Palvelu</option>
+                        <option value="Other">Muu</option>
+                    </select>
+                </div>
+
             </div>
             <div style="display: inline" class="address-container">
-                <div style="float: left; width: 39%; margin-right: 1%">
-                    <label for="add-author"><b>Kirjailija</b></label>
-                    <input type="text" placeholder="Kirjailija..." name="add-author" id="add-author" required>
+                <div style="float: left; width: 49.5%; margin-right: 1%">
+                    <label for="add-publisher">Merkki</label>
+                    <input type="text" placeholder="Merkki..." name="add-publisher" id="add-publisher" required>
                 </div>
-                <div style="float: left; width: 29.5%; margin-right: 1%">
-                    <label for="add-publisher"><b>Julkaisija</b></label>
-                    <input type="text" placeholder="Julkaisija..." name="add-publisher" id="add-publisher" required>
-                </div>
-                <div style="float: left; width: 29.5%;">
-                    <label for="add-published"><b>Julkaistu</b></label>
+                <div style="float: left; width: 49.5%;">
+                    <label for="add-published">Vuosimalli</label>
                     <input type="date" max="<?php echo date("Y-m-d");?>" name="add-published" id="add-published" required>
                 </div>
             </div>
             <div style="display: inline">
                 <div style="float: left; width: 49.5%; margin-left: 1px">
-                    <label for="add-language"><b>Kieli</b></label>
+                    <label for="add-language">Kieli</label>
                     <select id="add-language" name="add-language">
                         <option value="Suomi" selected>Suomi</option>
                         <option value="Finglish">Finglish</option>
@@ -58,7 +67,7 @@
 
                 </div>
                 <div style="float: right; width: 49.5%;">
-                    <label for="add-isbn"><b>ISBN</b></label>
+                    <label for="add-isbn">ISBN</label>
                     <input type="text" placeholder="ISBN..." name="add-isbn" id="add-isbn" required>
                 </div>
             </div>
@@ -66,7 +75,7 @@
                 <label for="add-description">Kuvaus</label>
                 <textarea id="add-description" name="add-description"></textarea>
             </div>
-            <button type="submit" name="submit">Lisää Kirja</button>
+            <button type="submit" name="submit">Lisää Esine</button>
         </div>
 
         <div class="container" style="background-color:#f1f1f1">

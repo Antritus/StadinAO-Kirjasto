@@ -8,7 +8,7 @@ requireScript("../javascript/popups/book.js");
 
 
 if (!isset($_GET["isbn"])){
-    header("location: books.php");
+    header("location: items.php");
 }
 
 if ($_SESSION["permission"] < 5){
@@ -18,12 +18,10 @@ if ($_SESSION["permission"] < 5){
 
 include_once "./build/dbh.inc.php";
 include_once "./build/functions.bld.php";
-include_once "init.php";
-
 global $conn;
 
 $isbn = $_GET["isbn"];
-$book = getBook($conn, $_GET["isbn"]);
+$book = getBook($conn, $isbn);
 
 $bookInventory = getInventory($conn, $isbn);
 
@@ -47,6 +45,7 @@ function echoIfNoPermission($permission, $echo) {
     }
     return "";
 }
+
 function valueOrDash($value)
 {
     if (!isset($value) || $value==null){
@@ -98,7 +97,16 @@ include_once "header.php";
                 <div class="alignment">
                     <div class="col-left"></div>
                     <div class="book-container">
-                        <span class="item-path"><a href="books.php">Kirjat</a> > <a href="book.php?isbn=<?php echo $isbn; ?>"><?php echo $book["name"]; ?></a></span>
+                        <div class="item-path">
+                            <span class="item-path"><a href="items.php">Tavarat</a> > <a href="item.php?isbn=<?php echo $isbn; ?>"><?php echo $book["name"]; ?></a></span>
+                            <!--
+                            <form method="post" action="books.delete.popup.php">
+                                <input hidden name='delete-isbn' value='<?php echo $isbn; ?>' id='delete-isbn'>
+                                <button type="submit"></button>
+                            </form>
+                            <button></button>
+                            --!>
+                        </div>
                         <div class="book-header">
                                 <form class="modal-content animate" method="post" action="build/book.borrow.bld.php">
                                     <div class="imgcontainer">
@@ -112,18 +120,8 @@ include_once "header.php";
                                                 <input type="text" placeholder="Kirjan nimi..." name="book-name" id="book-name" value="<?php echo $book["name"]; ?>" required <?php echo echoIfNoPermission(5, "readonly"); ?>>
                                             </div>
                                             <div style="width: 49.5%; float: right">
-                                                <label for="book-author"><b>Kirjoittaja</b></label>
-                                                <input type="text" placeholder="Kirjoittaja..." name="book-author" id="book-author" value="<?php echo $book["author"]; ?>" required <?php echo echoIfNoPermission(5, "readonly"); ?>>
-                                            </div>
-                                        </div>
-                                        <div style="display: inline">
-                                            <div style="width: 49.5%; float: left; margin-right: 1%">
-                                                <label for="book-publisher"><b>Julkaisija</b></label>
-                                                <input type="text" placeholder="Julkaisija..." name="book-publisher" id="book-publisher" value="<?php echo $book["publisher"]; ?>" required <?php echo echoIfNoPermission(5, "readonly"); ?>>
-                                            </div>
-                                            <div style="float: right; width: 49.5%;">
-                                                <label for="book-published"><b>Julkaistu</b></label>
-                                                <input type="date" value="<?php echo dateFromNow("+0 months") ?>" max="<?php echo dateFromNow("+1 days"); ?>" name="book-published" id="book-published" value="<?php echo $book["released"]; ?>" required <?php echo echoIfNoPermission(5, "readonly"); ?>>
+                                                <label for="book-publisher"><b>Merkki</b></label>
+                                                <input type="text" placeholder="Merkki..." name="book-publisher" id="book-publisher" value="<?php echo $book["publisher"]; ?>" required <?php echo echoIfNoPermission(5, "readonly"); ?>>
                                             </div>
                                         </div>
                                         <div style="display: inline">
@@ -136,6 +134,10 @@ include_once "header.php";
                                                     <option value="Svenska" <?php echo ($book["language"]=="Svenska") ? "selected" : "";?>>Svenska</option>
                                                     <option value="Other" <?php echo ($book["language"]=="Other") ? "selected" : "";?>>Muu</option>
                                                 </select>
+                                            </div>
+                                            <div style="float: right; width: 49.5%;">
+                                                <label for="book-published"><b>Vuosimalli</b></label>
+                                                <input type="date" value="<?php echo dateFromNow("+0 months") ?>" max="<?php echo dateFromNow("+1 days"); ?>" name="book-published" id="book-published" value="<?php echo $book["released"]; ?>" required <?php echo echoIfNoPermission(5, "readonly"); ?>>
                                             </div>
                                         </div>
 
@@ -199,15 +201,11 @@ include_once "header.php";
                 <button class='borrow' type='submit' name='isbn' onclick='".js("extend", $isbn, $id, $book["name"], $item['borrower'])."'>Pidennä Lainausta</button>");
                                                 echo echoIfPermission(5,
                                                         "
-<button class='return' onclick='".js("bookReturn", $isbn, $item["id"], $book["name"], $item["borrower"], $item["borrow_end"]))."'>Palauta</button>
-    </th>
-</tr>";
+<button class='return' onclick='".js("bookReturn", $isbn, $item["id"], $book["name"], $item["borrower"], $item["borrow_end"]))."'>Palauta</button>";
                                             } else {
                                                 echo echoIfPermission(5,
                                                         "
-<button class='return last-chance' onclick='".js("bookReturn", $isbn, $item["id"], $book["name"], $item["borrower"], $item["borrow_end"]))."'>Palauta</button>
-    </th>
-</tr>";
+<button class='return last-chance' onclick='".js("bookReturn", $isbn, $item["id"], $book["name"], $item["borrower"], $item["borrow_end"]))."'>Palauta</button>";
 
                                             }
 
@@ -215,11 +213,12 @@ include_once "header.php";
                                             echo echoIfPermission(5,
                                                     "
         <button type='submit' class='return' name='submit' onclick='".js("bookBorrow", $isbn, $item["id"], $book["name"])."'>Lainaa</button>
-    ")
-                                                . "
-    </th>
-</tr>";
+    ");
+                                            echo echoIfPermission(10, "
+                                  <button class='delete' type='submit' class='return' name='submit' onclick='" . js("deleteBook", $isbn, $item["id"], $item["description"]) . "'>Poista</button>
+                                   ");
                                         }
+                                        echo "</th></tr>";
                                     }
                                 }
                                 ?>
@@ -233,10 +232,11 @@ include_once "header.php";
 
 
 <?php
-include_once "book.return.popup.php";
-include_once "book.extend.popup.php";
-include_once "book.add.popup.php";
-include_once "book.borrow.popup.php";
+include_once "item.return.popup.php";
+include_once "item.extend.popup.php";
+include_once "item.add.popup.php";
+include_once "item.borrow.popup.php";
+include_once "item.delete.popup.php";
 
 include_once "footer.php";
 

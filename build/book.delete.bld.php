@@ -12,12 +12,8 @@ if (isset($_POST["submit"])) {
     }
 
     // Get submitted data from the signup form
-    $isbn = $_POST["add-isbn"];
-    $isbnBook = $_POST["add-isbn-book"];
-    $isbnBook = str_replace("$-", $isbn."-", $isbnBook);
-    $isbnBook = str_replace("$", $isbn."-", $isbnBook);
-
-    $description = $_POST["add-description"];
+    $isbn = $_POST["delete-isbn"];
+    $isbnBook = $_POST["delete-isbn-book"];
     $return = $_POST["return"];
 
     require_once "dbh.inc.php";
@@ -39,7 +35,7 @@ if (isset($_POST["submit"])) {
         exit();
     }
 
-    addBookCopy($conn, $isbn, $isbnBook, $description);
+    deleteBookCopy($conn, $isbn, $isbnBook);
     header("location: ../$return?isbn=$isbn");
 } else {
     header("location: ../index.php");

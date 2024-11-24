@@ -1,6 +1,6 @@
 <div id="extend-book" class="modal login-screen">
     <form class="modal-content animate" method="post" action="build/book.extend.bld.php">
-        <input readonly hidden name="return" id="return" value="book.php">
+        <input readonly hidden name="return" id="return" value="item.php">
         <div class="imgcontainer">
             <h1>Pidennä Lainausta</h1>
 
@@ -30,8 +30,8 @@
 
         <div class="container">
             <div style="display: inline">
-                <label for="extend-book-name"><b>Kirja</b></label>
-                <input readonly type="text" placeholder="Kirjan nimi..." name="extend-book-name" id="extend-book-name" required>
+                <label for="extend-book-name"><b>Nimi</b></label>
+                <input readonly type="text" placeholder="Nimi..." name="extend-book-name" id="extend-book-name" required>
             </div>
             <div style="display: inline">
                 <div style="width: 49.5%; float: left">
@@ -39,7 +39,7 @@
                     <input readonly type="text" placeholder="ISBN..." name="extend-isbn" id="extend-isbn" required>
                 </div>
                 <div style="width: 49.5%; margin-left: 1%; float: right">
-                    <label for="extend-book-isbn"><b>ISBN (Kirja)</b></label>
+                    <label for="extend-book-isbn">ISBN (Esine)</label>
                     <input readonly type="text" placeholder="ISBN..." name="extend-book-isbn" id="extend-book-isbn" required>
                 </div>
             </div>
@@ -61,13 +61,3 @@
         </div>
     </form>
 </div>
-
-
-<?php
-if (isset($_GET["error"]) && $_GET["error"] == "book_is_not_borrowed"){
-    global $conn;
-    $book = getBook($conn, $_GET["isbn"]);
-    $item = getItem($conn, $book, $_GET["bookIsbn"]);
-
-    echo "<script>".js("bookBorrow", $item["id"], $book["isbn"], $book["name"], $item["borrowed"])."</script>";
-}

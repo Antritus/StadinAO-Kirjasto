@@ -1,8 +1,8 @@
 <div id="borrow-book" class="modal login-screen">
     <form class="modal-content animate" method="post" action="build/book.borrow.bld.php">
-        <input readonly hidden name="return" id="return" value="book.php">
+        <input readonly hidden name="return" id="return" value="item.php">
         <div class="imgcontainer">
-            <h1>Kirjan Lainaus</h1>
+            <h1>Esineen Lainaus</h1>
 
 
             <?php
@@ -30,8 +30,8 @@
 
         <div class="container">
             <div style="display: inline">
-                <label for="borrow-book-name"><b>Kirja</b></label>
-                <input readonly type="text" placeholder="Kirjan nimi..." name="borrow-book-name" id="borrow-book-name" required>
+                <label for="borrow-book-name"><b>Nimi</b></label>
+                <input readonly type="text" placeholder="Nimi..." name="borrow-book-name" id="borrow-book-name" required>
             </div>
             <div style="display: inline">
                 <div style="width: 49.5%; float: left">
@@ -39,7 +39,7 @@
                     <input readonly type="text" placeholder="ISBN..." name="borrow-isbn" id="borrow-isbn" required>
                 </div>
                 <div style="width: 49.5%; margin-left: 1%; float: right">
-                    <label for="borrow-book-isbn"><b>ISBN (Kirja)</b></label>
+                    <label for="borrow-book-isbn"><b>ISBN (Esine)</b></label>
                     <input readonly type="text" placeholder="ISBN..." name="borrow-book-isbn" id="borrow-book-isbn" required>
                 </div>
             </div>
@@ -61,10 +61,3 @@
         </div>
     </form>
 </div>
-
-<?php
-if (isset($_GET["error"]) && $_GET["error"] == "book_is_borrowed"){
-    global $conn;
-    $book = getBook($conn, $_GET["isbn"]);
-    echo "<script>".js("bookBorrow", $_GET["bookIsbn"], $book["isbn"], $book["name"])."</script>";
-}

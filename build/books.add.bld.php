@@ -19,12 +19,13 @@ if (isset($_POST["submit"])) {
     $language = $_POST["add-language"];
     $isbn = $_POST["add-isbn"];
     $description = $_POST["add-description"];
+    $return = $_POST["return"];
 
     require_once "dbh.inc.php";
     require_once "functions.bld.php";
 
     if (anyFieldsEmpty($name, $author, $publisher, $published, $language, $isbn, $description)) {
-        header("location: ../books.php?error=field_empty");
+        header("location: ../$return?error=field_empty");
         exit();
     }
 
@@ -35,7 +36,7 @@ if (isset($_POST["submit"])) {
     }
 
     createBook($conn, $name, $author, $publisher, $published, $language, $isbn, $description);
-    header("location: ../books.php");
+    header("location: ../$return");
 } else {
     header("location: ../index.php");
     exit();

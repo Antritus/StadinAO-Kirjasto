@@ -133,7 +133,7 @@ function getAccounts($conn, $start, $end) {
 }
 
 function getBooks($conn, $start, $end) {
-    $query = "SELECT * FROM books LIMIT ? OFFSET ?";
+    $query = "SELECT * FROM books WHERE category = ? LIMIT ? OFFSET ?";
 
     $stmt = mysqli_stmt_init($conn);
 
@@ -141,8 +141,9 @@ function getBooks($conn, $start, $end) {
         header("location: ../index.php?error=stmt_failure");
         exit();
     }
+    $category = "Book";
 
-    mysqli_stmt_bind_param($stmt, "ii", $end, $start);
+    mysqli_stmt_bind_param($stmt, "sii", $category, $end, $start);
     mysqli_stmt_execute($stmt);
 
     $resultSet = mysqli_stmt_get_result($stmt);
@@ -164,9 +165,77 @@ function getBooks($conn, $start, $end) {
 
     return !empty($books) ? $books : false;
 }
+function getItems($conn, $start, $end) {
+    $query = "SELECT * FROM books WHERE category != ? LIMIT ? OFFSET ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_failure");
+        exit();
+    }
+
+    $category = "Book";
+
+    mysqli_stmt_bind_param($stmt, "sii", $category, $end, $start);
+    mysqli_stmt_execute($stmt);
+
+    $resultSet = mysqli_stmt_get_result($stmt);
+
+    $i = 0;
+    $books = [];
+    while ($row = mysqli_fetch_assoc($resultSet)) {
+        $books[$i] = array(
+            "isbn" => $row["isbn"] ?? null,
+            "name" => $row["name"] ?? null,
+            "description" => $row["description"] ?? null,
+            "language" => $row["language"] ?? null,
+            "released" => $row["released"] ?? null,
+            "author" => $row["author"] ?? null,
+            "publisher" => $row["publisher"] ?? null,
+            "category" => $row["category"] ?? null
+        );
+        $i++;
+    }
+
+    return !empty($books) ? $books : false;
+}
+function getItemsByCategory($conn, $start, $end, $category) {
+    $query = "SELECT * FROM books WHERE category = ? LIMIT ? OFFSET ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sii", $category, $end, $start);
+    mysqli_stmt_execute($stmt);
+
+    $resultSet = mysqli_stmt_get_result($stmt);
+
+    $i = 0;
+    $books = [];
+    while ($row = mysqli_fetch_assoc($resultSet)) {
+        $books[$i] = array(
+            "isbn" => $row["isbn"] ?? null,
+            "name" => $row["name"] ?? null,
+            "description" => $row["description"] ?? null,
+            "language" => $row["language"] ?? null,
+            "released" => $row["released"] ?? null,
+            "author" => $row["author"] ?? null,
+            "publisher" => $row["publisher"] ?? null,
+            "category" => $row["category"] ?? null
+        );
+        $i++;
+    }
+
+    return !empty($books) ? $books : false;
+}
 
 function getBook($conn, $isbn){
-    $query = "SELECT * FROM books WHERE isbn = ? AND category = 'Book'";
+    $query = "SELECT * FROM books WHERE isbn = ?";
 
     $stmt = mysqli_stmt_init($conn);
 
@@ -188,7 +257,8 @@ function getBook($conn, $isbn){
             "language" => $row["language"] ?? null,
             "released" => $row["released"] ?? null,
             "author" => $row["author"] ?? null,
-            "publisher" => $row["publisher"] ?? null
+            "publisher" => $row["publisher"] ?? null,
+            "category" => $row["category"] ?? null
         );
     }
     return false;
@@ -208,9 +278,9 @@ function createBook($conn, mixed $name, mixed $author, mixed $publisher, mixed $
     mysqli_stmt_bind_param($stmt, "sssssss", $isbn, $name, $description, $language, $published, $author, $publisher);
     mysqli_stmt_execute($stmt);
 }
-function createItem($conn, mixed $isbn, mixed $name, mixed $description, $released, mixed $brand, $category)
+function createItem($conn, mixed $isbn, mixed $name, mixed $description, $released, mixed $brand, $category, $language)
 {
-    $query = "INSERT INTO books (isbn, name, description, released, publisher, category) VALUES (?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO books (isbn, name, description, released, publisher, category, language) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_stmt_init($conn);
 
@@ -219,7 +289,7 @@ function createItem($conn, mixed $isbn, mixed $name, mixed $description, $releas
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "ssssss", $isbn, $name, $description, $released, $brand, $category);
+    mysqli_stmt_bind_param($stmt, "sssssss", $isbn, $name, $description, $released, $brand, $category, $language);
     mysqli_stmt_execute($stmt);
 }
 
@@ -260,6 +330,7 @@ function getInventory($conn, $isbn)
         $items[$i] = array(
             "isbn"=> $row["isbn"] ?? null,
             "id"=>$row["id"] ?? null,
+            "description"=>$row["description"] ?? null,
             "borrower" => $row["borrowed"] ?? null,
             "borrow_start"=>$row["dateBorrowed"] ?? null,
             "borrow_end" => $row["licenseEnds"] ?? null
@@ -288,6 +359,7 @@ function getItem($conn, $isbn, $isbnItem)
         return array(
             "isbn"=> $row["isbn"] ?? null,
             "id"=>$row["id"] ?? null,
+            "description"=>$row["description"] ?? null,
             "borrower" => $row["borrowed"] ?? null,
             "borrow_start"=>$row["dateBorrowed"] ?? null,
             "borrow_end" => $row["licenseEnds"] ?? null
@@ -332,9 +404,23 @@ function getPermission($conn, $id)
     return 0;
 }
 
-function addBookCopy($conn, $isbn, $isbnBook): void
+function addBookCopy($conn, $isbn, $isbnBook, $description): void
 {
-    $query = "INSERT INTO item_isbn (id, isbn) VALUES (?, ?);";
+    $query = "INSERT INTO item_isbn (id, isbn, description) VALUES (?, ?, ?);";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../book.php?error=stmt_failure&isbn=$isbn");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sss", $isbnBook, $isbn, $description);
+    mysqli_stmt_execute($stmt);
+}
+function deleteBookCopy($conn, $isbn, $isbnBook): void
+{
+    $query = "DELETE FROM item_isbn WHERE id = ? AND isbn = ?";
 
     $stmt = mysqli_stmt_init($conn);
 
@@ -345,8 +431,8 @@ function addBookCopy($conn, $isbn, $isbnBook): void
 
     mysqli_stmt_bind_param($stmt, "ss", $isbnBook, $isbn);
     mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
 }
-
 function isBorrowed($conn, $isbn, $isbnBook) : bool{
     $query = "SELECT * FROM item_isbn WHERE id = ? AND isbn = ?";
 

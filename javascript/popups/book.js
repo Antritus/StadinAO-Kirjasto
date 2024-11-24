@@ -2,6 +2,26 @@ let extendElement = document.getElementById('extend-book');
 let borrowElement = document.getElementById('borrow-book');
 let addElement = document.getElementById('add-book');
 let returnElement = document.getElementById('return-book');
+let deleteElement = document.getElementById("delete-book");
+
+function deleteBook(ISBN, bookISBN, description) {
+    clearDelete();
+    deleteElement.style.display = "block";
+    document.getElementById("delete-isbn").value = ISBN;
+    document.getElementById("delete-isbn-book").value = bookISBN;
+    document.getElementById("delete-description").value = description;
+}
+
+function clearDelete(){
+    fetchDeleteElement();
+    deleteElement.style.display = "none";
+}
+
+function fetchDeleteElement(){
+    if (deleteElement == null) {
+        deleteElement = document.getElementById("delete-book");
+    }
+}
 
 async function bookBorrow(ISBN, bookISBN, book) {
     await clearBorrow().then(r => borrowElement.style.display = "block");
