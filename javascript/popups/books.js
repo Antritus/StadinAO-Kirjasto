@@ -1,54 +1,38 @@
-let bookAddElement = document.getElementById('add-book');
-let bookDeleteElement = document.getElementById('book-delete');
 
-function deleteBook(isbn, name, author, description, language, publisher, published) {
-    clearDeleteBook();
-    bookDeleteElement.style.display = "block";
-
-    document.getElementById("delete-book-name").value = name;
-    document.getElementById("delete-isbn").value = isbn;
-    document.getElementById("delete-author").value = author;
-    document.getElementById("delete-publisher").value = publisher;
-    document.getElementById("delete-published").value = published;
-    document.getElementById("delete-language").value = language;
-    document.getElementById("delete-description").value = description;
+function openBookAdd(){
+    $("#add-book").show();
+}
+function closeBookAdd(){
+    $("#add-book").hide();
+}
+function openBookDelete(isbn, name, author, description, language, publisher, published) {
+    $("#book-delete").show();
+    $("#delete-book-name").val(name);
+    $("#delete-isbn").val(isbn);
+    $("#delete-author").val(author);
+    $("#delete-publisher").val(publisher);
+    $("#delete-published").val(published);
+    $("#delete-language").val(language);
+    $("#delete-description").val(description);
+}
+function closeBookDelete(){
+    $("#book-delete").hide();
 }
 
-function clearDeleteBook() {
-    fetchDeleteElement();
-    bookDeleteElement.style.display = "none";
-}
+$(document).ready(function() {
+    closeBookDelete();
+    closeBookAdd();
 
-function fetchDeleteElement() {
-    if (bookDeleteElement == null)
-        bookDeleteElement = document.getElementById('book-delete');
-}
+    $("#add-book-btn").click(function() {
+        openBookAdd();
+    });
 
-function addBook() {
-    console.log("hi");
-    fetchBookAdd();
-    console.log("hi 2");
-    bookAddElement.style.display = "block";
-    console.log("hi 3");
-}
+    $(".modal").on("click", function() {
+        closeBookAdd();
+        closeBookDelete();
+    });
 
-function clearBookAdd() {
-    fetchBookAdd();
-    bookAddElement.style.display = "none";
-}
-
-function fetchBookAdd() {
-    if (bookAddElement == null)
-        bookAddElement = document.getElementById('add-book');
-}
-window.onclick = function(event) {
-    console.log("Hi");
-    fetchDeleteElement();
-    fetchBookAdd();
-    if (event.target == bookDeleteElement
-        || event.target == bookAddElement
-    ) {
-        clearDeleteBook();
-        clearBookAdd();
-    }
-}
+    $(".modal-content").on("click", function(event) {
+        event.stopPropagation();
+    });
+});

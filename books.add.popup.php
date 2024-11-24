@@ -70,7 +70,7 @@
         </div>
 
         <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="clearBookAdd()" class="cancelbtn">Cancel</button>
+            <button type="button" onclick="closeBookAdd()" class="cancelbtn">Cancel</button>
         </div>
     </form>
 </div>

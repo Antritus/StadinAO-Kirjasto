@@ -2,6 +2,7 @@
 include_once "init.php";
 requireStyle("../css/manage_users.css");
 requireStyle("../css/userstable.css");
+requireScript("../javascript/popups/accounts.js");
 
 
 if ($_SESSION["permission"] < 5){
@@ -34,8 +35,16 @@ function echoIfPermission($permission, $echo) {
                 <a href="index.php"><img src="assets/logo.png"></a>
             </div>
             <div class="screen">
+                <?php
+                // TODO Compolete - addAccount
+                echo echoIfPermission(5, "
+                <button class='add' id='add-account-btn'>
+                    Lisää Käyttäjä
+                </button>
+");
+                ?>
+
                 <h1>Account Manager</h1>
-                <h3>Select Account: <span class="select-account">NONE</span></h3>
             </div>
         </div>
         <div class="src">
@@ -72,14 +81,12 @@ function echoIfPermission($permission, $echo) {
                             <th>{$account['birthday']}</th>
                             <th>{$account['address']}, {$account['postcode']}, {$account['postArea']}</th>
                             <th class='edit-buttons'>".
-                                    echoIfPermission(10, "<button class='edit'>Edit</button>").
-                                    echoIfPermission(10, "<button class='delete'>Delete</button>").
-  //                          <button class='edit'>EDIT</button>
-//                            ".
-//                                    echoIfPermission(5, "<button class='edit-details'>Edit Details</button>") .
-  //                                  echoIfPermission(5, "<button class='borrow'>Borrow</button>") .
-    //                                echoIfPermission(8, "<button class='history'>History</button>") .
-      //                              echoIfPermission(10, "<button class='edit-details'>Delete</button>")."
+                                    echoIfPermission(5, "
+            <form action='account.php' method='get'>
+                <input hidden name='id' value='".$account['id']."'>
+                <button class='edit' type='submit'>Tarkastele</button>
+            </form>").
+                                    echoIfPermission(10, "<button class='delete' onclick='openAccountDelete(`{$account['id']}`, `{$account['email']}`, `{$account['accountName']}`, `{$account['name']}`, `{$account['surname']}`, `{$account['birthday']}`, `{$account['address']}`,  `{$account['postcode']}`, `{$account['postArea']}`)'>Delete</button>").
                             "
                             </th>
                         </tr>";
@@ -96,5 +103,9 @@ function echoIfPermission($permission, $echo) {
 
 
 <?php
+
+include_once "accounts.add.popup.php";
+include_once "accounts.delete.popup.php";
+
 include_once "footer.php";
 

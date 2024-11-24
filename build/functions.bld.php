@@ -119,7 +119,7 @@ function getAccounts($conn, $start, $end) {
             "id"=>$row["userid"],
             "email"=>$row["email"],
             "accountName" => (empty($row["accountName"]) ? NULL : $row["accountName"]),
-            "name"=>$row["email"],
+            "name"=>$row["name"],
             "surname"=>$row["sName"],
             "address"=>$row["address"],
             "postcode"=>$row["postcode"],
@@ -130,6 +130,37 @@ function getAccounts($conn, $start, $end) {
     }
 
     return !empty($accounts) ? $accounts : false;
+}
+function getAccount($conn, $id) {
+    $query = "SELECT * FROM users WHERE userid = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+
+    $resultSet = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultSet)) {
+        return array(
+            "id"=>$row["userid"],
+            "email"=>$row["email"],
+            "accountName" => (empty($row["accountName"]) ? NULL : $row["accountName"]),
+            "name"=>$row["name"],
+            "surname"=>$row["sName"],
+            "address"=>$row["address"],
+            "postcode"=>$row["postcode"],
+            "postArea"=>$row["postArea"],
+            "birthday"=>$row["birthday"],
+        );
+    }
+
+    return false;
 }
 
 function getBooks($conn, $start, $end) {
@@ -320,6 +351,37 @@ function getInventory($conn, $isbn)
     }
 
     mysqli_stmt_bind_param($stmt, "s", $isbn);
+    mysqli_stmt_execute($stmt);
+
+    $resultSet = mysqli_stmt_get_result($stmt);
+
+    $i = 0;
+    $items = [];
+    while ($row = mysqli_fetch_assoc($resultSet)) {
+        $items[$i] = array(
+            "isbn"=> $row["isbn"] ?? null,
+            "id"=>$row["id"] ?? null,
+            "description"=>$row["description"] ?? null,
+            "borrower" => $row["borrowed"] ?? null,
+            "borrow_start"=>$row["dateBorrowed"] ?? null,
+            "borrow_end" => $row["licenseEnds"] ?? null
+        );
+        $i++;
+    }
+    return $items;
+}
+function getBorrowedAccount(bool|the|mysqli $conn, mixed $id)
+{
+    $query = "SELECT * FROM item_isbn WHERE borrowed = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
 
     $resultSet = mysqli_stmt_get_result($stmt);

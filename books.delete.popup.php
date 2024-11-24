@@ -10,7 +10,7 @@
             if (isset($_GET["error"])) {
                 switch ($_GET["error"]) {
                     case "field_empty":
-                        echo "<div class='login-error'><h2>Kirjaa ei poistettut!</h2><p>Täytä pakolliset kohdat</p></div>";
+                        echo "<div class='login-error'><h2>Kirjaa ei poistettu!</h2><p>Täytä pakolliset kohdat</p></div>";
                         break;
                     case "stmt_failure":
                         echo "<div class='login-error'><h2>Kirjaa ei poistettu!</h2><p>Järjestelmässä tapahtui virhe. Koita uudelleen</p></div>";
@@ -70,7 +70,7 @@
         </div>
 
         <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="clearDeleteBook()" class="cancelbtn">Cancel</button>
+            <button type="button" onclick="closeBookDelete()" class="cancelbtn">Cancel</button>
         </div>
     </form>
 </div>

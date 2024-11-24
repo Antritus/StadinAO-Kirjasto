@@ -17,6 +17,7 @@ include_once "build/functions.bld.php";
             echo "<link rel='stylesheet' type='text/css' href='$styles[$i]'>";
         }
     ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="javascript/animated_text.js"></script>
     <script src="javascript/popups/signin.js"></script>
     <script src="javascript/menu.js"></script>
@@ -69,7 +70,7 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
                     echo "<a class='menu-left' href='books.php'>Kirjat</a>";
                     echo "<a class='menu-left' href='items.php'>Tavarat</a>";
 
-                    echo "<a class='menu-right' href='edit_accounts.php'>Tilit</a>";
+                    echo "<a class='menu-right' href='accounts.php'>Tilit</a>";
                 }
             }
         ?>

@@ -47,7 +47,7 @@ function echoIfNoPermission($permission, $echo) {
             <div class="screen">
                 <?php
                 echo echoIfPermission(5, "
-                <button class='add' onclick='addBook()'>
+                <button class='add' id='add-book-btn'>
                     Lisää Kirja
                 </button>
 ");
@@ -96,7 +96,7 @@ function echoIfNoPermission($permission, $echo) {
             </form>")
                                 . echoIfPermission(10,
                                     "
-        <button type='submit' class='delete' name='submit' onclick='".js("deleteBook", htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['name'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['description'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['language'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['publisher'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['released'], ENT_QUOTES, 'UTF-8'))."'
+        <button type='submit' class='delete' name='submit' onclick='".js("openBookDelete", htmlspecialchars($book['isbn'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['name'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['description'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['language'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['publisher'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($book['released'], ENT_QUOTES, 'UTF-8'))."'
         >Poista Järjestelmästä</button>
 "
                                     /*

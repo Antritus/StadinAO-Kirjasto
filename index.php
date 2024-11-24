@@ -2,7 +2,7 @@
 include_once "init.php";
 
 if (isset($_SESSION["id"])){
-    header("location: edit_accounts.php");
+    header("location: books.php");
     exit();
 }
 
