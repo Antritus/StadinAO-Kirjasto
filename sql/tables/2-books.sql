@@ -6,5 +6,6 @@ CREATE TABLE books (
     released VARCHAR(11),
     author VARCHAR(100),
     publisher VARCHAR(100),
+    category VARCHAR(50),
     PRIMARY KEY (isbn)
 )

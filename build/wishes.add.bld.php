@@ -11,24 +11,21 @@ if (isset($_POST["submit"])) {
         exit();
     }
 
+    // Get submitted data from the signup form
+    $name = $_POST["add-book-name"];
+    $author = $_POST["add-author"];
+    $publisher = $_POST["add-publisher"];
+    $published = $_POST["add-published"];
+    $language = $_POST["add-language"];
     $isbn = $_POST["add-isbn"];
-    $isbnBook = $_POST["add-isbn-book"];
-    $isbnBook = str_replace("$-", $isbn."-", $isbnBook);
-    $isbnBook = str_replace("$", $isbn."-", $isbnBook);
-
     $description = $_POST["add-description"];
     $return = $_POST["return"];
 
     require_once "dbh.inc.php";
     require_once "functions.bld.php";
 
-    if (anyFieldsEmpty($isbn, $isbnBook)) {
-        header("location: ../$return?error=field_empty&isbn=$isbn");
-        exit();
-    }
-
-    if (itemIsbnExists($conn, $isbn, $isbnBook)){
-        header("location: ../$return?error=isbn_already_exists&isbn={$_POST["add-isbn"]}");
+    if (anyFieldsEmpty($name, $author, $publisher, $published, $language, $isbn, $description)) {
+        header("location: ../$return?error=field_empty");
         exit();
     }
 
@@ -38,8 +35,8 @@ if (isset($_POST["submit"])) {
         exit();
     }
 
-    addBookCopy($conn, $isbn, $isbnBook, $description);
-    header("location: ../$return?isbn=$isbn");
+    createWish($conn, $name, $author, $publisher, $published, $language, $isbn, $description);
+    header("location: ../$return");
 } else {
     header("location: ../index.php");
     exit();

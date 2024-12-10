@@ -154,7 +154,7 @@ include_once "header.php";
                             </div>
                         <div class="book-footer modal-content non-form">
                             <div class="imgcontainer">
-                                <h1><?php echo $book["name"];?></h1>
+                                <h1>Lainaukset</h1>
                             </div>
                             <div class="container">
                             <table class="content-table">
@@ -199,27 +199,24 @@ include_once "header.php";
                 <button class='borrow' type='submit' name='isbn' onclick='".js("extend", $isbn, $id, $book["name"], $item['borrower'])."'>Pidennä Lainausta</button>");
                                                 echo echoIfPermission(5,
                                                         "
-<button class='return' onclick='".js("bookReturn", $isbn, $item["id"], $book["name"], $item["borrower"], $item["borrow_end"]))."'>Palauta</button>
-    </th>
-</tr>";
+<button class='return' onclick='".js("bookReturn", $isbn, $item["id"], $book["name"], $item["borrower"], $item["borrow_end"]))."'>Palauta</button>";
                                             } else {
                                                 echo echoIfPermission(5,
                                                         "
-<button class='return last-chance' onclick='".js("bookReturn", $isbn, $item["id"], $book["name"], $item["borrower"], $item["borrow_end"]))."'>Palauta</button>
-    </th>
-</tr>";
+<button class='return last-chance' onclick='".js("bookReturn", $isbn, $item["id"], $book["name"], $item["borrower"], $item["borrow_end"]))."'>Palauta</button>";
 
                                             }
 
                                         } else {
                                             echo echoIfPermission(5,
-                                                    "
+                                                "
         <button type='submit' class='return' name='submit' onclick='".js("bookBorrow", $isbn, $item["id"], $book["name"])."'>Lainaa</button>
-    ")
-                                                . "
-    </th>
-</tr>";
+    ");
+                                            echo echoIfPermission(10, "
+                                  <button class='delete' type='submit' class='return' name='submit' onclick='" . js("deleteBook", $isbn, $item["id"], $item["description"]) . "'>Poista</button>
+                                   ");
                                         }
+                                        echo "</th></tr>";
                                     }
                                 }
                                 ?>

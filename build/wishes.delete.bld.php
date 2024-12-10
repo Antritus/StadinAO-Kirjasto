@@ -1,7 +1,6 @@
 <?php
 global $conn;
 
-
 if (isset($_POST["submit"])) {
     session_start();
     if (!isset($_SESSION["permission"])){
@@ -12,35 +11,23 @@ if (isset($_POST["submit"])) {
         exit();
     }
 
-    $id = $_POST["delete-id"];
-    $return = $_POST["return"];
-    if ($return==null){
-        $return = "accounts.php";
-    }
-
     require_once "dbh.inc.php";
     require_once "functions.bld.php";
 
-    if (anyFieldsEmpty($id)) {
-        header("location: ../$return?error=field_empty&isbn=$id");
-        exit();
-    }
-
-    $books = getBorrowedAccount($conn, $id);
-
-    if (isset($books) && sizeof($books) > 0){
-        header("location: ../$return?error=returns_not_returned&isbn=$id");
-        exit();
-    }
-
+    $isbn = $_POST["delete-isbn"];
     $permission = getPermission($conn, $_SESSION["id"]);
     if ($permission < 10){ // No permission
         header("location: ../index.php");
         exit();
     }
 
-    deleteAccount($conn, $id);
-    header("location: ../$return?isbn=$id");
+    if (anyFieldsEmpty($isbn)) {
+        header("location: ../wishes.php?error=field_empty");
+        exit();
+    }
+
+    deleteWish($conn, $isbn);
+    header("location: ../wishes.php");
 } else {
     header("location: ../index.php");
     exit();

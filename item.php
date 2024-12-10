@@ -156,7 +156,7 @@ include_once "header.php";
                             </div>
                         <div class="book-footer modal-content non-form">
                             <div class="imgcontainer">
-                                <h1><?php echo $book["name"];?></h1>
+                                <h1>Lainaukset</h1>
                             </div>
                             <div class="container">
                             <table class="content-table">

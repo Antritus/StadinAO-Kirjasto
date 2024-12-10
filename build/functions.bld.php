@@ -309,6 +309,20 @@ function createBook($conn, mixed $name, mixed $author, mixed $publisher, mixed $
     mysqli_stmt_bind_param($stmt, "sssssss", $isbn, $name, $description, $language, $published, $author, $publisher);
     mysqli_stmt_execute($stmt);
 }
+function createWish($conn, mixed $name, mixed $author, mixed $publisher, mixed $published, mixed $language, mixed $isbn, mixed $description)
+{
+    $query = "INSERT INTO wishes (isbn, name, description, language, released, author, publisher) VALUES (?, ?, ?, ?, ?, ?, ?);";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../books.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sssssss", $isbn, $name, $description, $language, $published, $author, $publisher);
+    mysqli_stmt_execute($stmt);
+}
 function createItem($conn, mixed $isbn, mixed $name, mixed $description, $released, mixed $brand, $category, $language)
 {
     $query = "INSERT INTO books (isbn, name, description, released, publisher, category, language) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -338,7 +352,20 @@ function deleteBook($conn, $isbn)
     mysqli_stmt_bind_param($stmt, "s", $isbn);
     mysqli_stmt_execute($stmt);
 }
+function deleteWish($conn, $isbn)
+{
+    $query = "DELETE FROM wishes WHERE isbn = ?;";
 
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../wishes.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $isbn);
+    mysqli_stmt_execute($stmt);
+}
 function getInventory($conn, $isbn)
 {
     $query = "SELECT * FROM item_isbn WHERE isbn = ?";
@@ -370,6 +397,26 @@ function getInventory($conn, $isbn)
     }
     return $items;
 }
+function deleteAccount(bool|the|mysqli $conn, mixed $id)
+{
+    $query = "DELETE FROM users WHERE userid =?";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location:../index.php?error=stmt_failure");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+
+    $books = getBorrowedAccount($conn, $id);
+    foreach ($books as $book) {
+        cancelBorrow($conn, $book['isbn'], $book["id"]);
+    }
+}
+
 function getBorrowedAccount(bool|the|mysqli $conn, mixed $id)
 {
     $query = "SELECT * FROM item_isbn WHERE borrowed = ?";

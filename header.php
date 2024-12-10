@@ -69,8 +69,8 @@ global $ADMINISTRATOR, $LIBRARIAN_BACKEND_WORKER, $LIBRARIAN_SERVICE_WORKER, $LO
                 if ($_SESSION["permission"] >= 5) {
                     echo "<a class='menu-left' href='books.php'>Kirjat</a>";
                     echo "<a class='menu-left' href='items.php'>Tavarat</a>";
-
-                    echo "<a class='menu-right' href='accounts.php'>Tilit</a>";
+                    echo "<a class='menu-left' href='accounts.php'>Tilit</a>";
+                    echo "<a class='menu-left' href='wishes.php'>Toiveet</a>";
                 }
             }
         ?>

@@ -1,6 +1,6 @@
 <div id="account-delete" class="modal login-screen">
-    <form id="account-delete-form" class="modal-content animate" method="post" action="build/books.delete.bld.php">
-        <input readonly hidden name="return" id="return" value="items.php">
+    <form id="account-delete-form" class="modal-content animate" method="post" action="build/accounts.delete.bld.php">
+        <input readonly hidden name="return" id="return" value="accounts.php">
         <div class="imgcontainer">
             <h1>Poista Tili</h1>
 
